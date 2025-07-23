@@ -1,0 +1,13 @@
+# Arquivos compilados
+*.exe
+*.o
+*.out
+
+# Diretórios gerados
+docs/latex/
+.vscode
+
+# Arquivos temporários comuns
+*.log
+*.swp
+*.DS_Store

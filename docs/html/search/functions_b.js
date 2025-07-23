@@ -1,0 +1,7 @@
+var searchData=
+[
+  ['setar_5fanimation_5fvia_5findex_0',['setar_animation_via_index',['../group___animation_control.html#gaf59872d904788614819b167389ddff60',1,'setar_animation_via_index(ObjetoComplexo *obj, int anim_index):&#160;graphycs.c'],['../group___animation_control.html#gaf59872d904788614819b167389ddff60',1,'setar_animation_via_index(ObjetoComplexo *obj, int anim_index):&#160;graphycs.c']]],
+  ['setar_5fanimation_5fvia_5fnome_1',['setar_animation_via_nome',['../group___animation_control.html#ga264b409c7c311bda637671d65ec735a8',1,'setar_animation_via_nome(ObjetoComplexo *obj, char nome[]):&#160;graphycs.c'],['../group___animation_control.html#ga264b409c7c311bda637671d65ec735a8',1,'setar_animation_via_nome(ObjetoComplexo *obj, char nome[]):&#160;graphycs.c']]],
+  ['setar_5fframe_5fobj_5fcomplexo_2',['setar_frame_obj_complexo',['../group___animation_control.html#ga2c2c9f1cbb273134e721ba0df21cebb6',1,'setar_frame_obj_complexo(Screen *s, ObjetoComplexo *obj, int frame):&#160;graphycs.c'],['../group___animation_control.html#ga2c2c9f1cbb273134e721ba0df21cebb6',1,'setar_frame_obj_complexo(Screen *s, ObjetoComplexo *obj, int frame):&#160;graphycs.c']]],
+  ['setup_5fanimations_3',['setup_animations',['../group___complex_object_creation.html#ga4bd0e622a4f1cff94d2315291af75de4',1,'setup_animations(ObjetoComplexo *obj, Animation anims[], int qtd_anims):&#160;graphycs.c'],['../group___complex_object_creation.html#ga4bd0e622a4f1cff94d2315291af75de4',1,'setup_animations(ObjetoComplexo *obj, Animation anims[], int qtd_anims):&#160;graphycs.c']]]
+];
