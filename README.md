@@ -70,3 +70,8 @@ Execute com:
 ./examples/piskel.exe
 ./examples/animacao.exe
 \endcode
+
+## Documentação
+
+Acesse a documentação gerada pelo Doxygen:  
+🔗 [https://gabriel-petersen.github.io/PetGraphycs/](https://gabriel-petersen.github.io/PetGraphycs/)
