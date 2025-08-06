@@ -9,8 +9,8 @@
 int main() 
 {
     // 1. Inicialização
-    Screen* tela = criar_tela(new_Vector2(90, 30), COLOR_CYAN);
-    Objeto* quadrado = criar_retangulo_monocromatico(COLOR_RED, new_Vector2(10, 10));
+    Screen* tela = criar_tela(new_Vector2(90, 30), COLOR_CIANO, 25);
+    Objeto* quadrado = criar_retangulo_monocromatico(COLOR_VERMELHO, new_Vector2(10, 10));
     centralizar_objeto(quadrado);
     desenhar_objeto(tela, quadrado);
 

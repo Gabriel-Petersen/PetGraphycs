@@ -22,7 +22,7 @@ MinhaLib/
 
 ### 2. Compilação Básica
 
-Para compilar um programa que usa sua biblioteca:
+Para compilar um programa que usa a biblioteca:
 
 \code{.sh}
 gcc -Wall -Wextra -Iinclude meu_programa.c src/graphycs.c -o meu_programa

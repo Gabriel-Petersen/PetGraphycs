@@ -40,21 +40,23 @@ typedef struct {
  */
 
 /** @brief Cor preta (RGB: 0, 0, 0). */
-#define COLOR_BLACK (Color){0, 0, 0}
+#define COLOR_PRETO    (Color){0, 0, 0}
 /** @brief Cor vermelha (RGB: 255, 0, 0). */
-#define COLOR_RED   (Color){255, 0, 0}
+#define COLOR_VERMELHO (Color){255, 0, 0}
 /** @brief Cor verde (RGB: 0, 255, 0). */
-#define COLOR_GREEN   (Color){0, 255, 0}
+#define COLOR_VERDE    (Color){0, 255, 0}
 /** @brief Cor amarela (RGB: 255, 255, 0). */
-#define COLOR_YELLOW  (Color){255, 255, 0}
+#define COLOR_AMARELO  (Color){255, 255, 0}
 /** @brief Cor azul (RGB: 0, 0, 255). */
-#define COLOR_BLUE    (Color){0, 0, 255}
+#define COLOR_AZUL     (Color){0, 0, 255}
 /** @brief Cor roxa (RGB: 128, 0, 128). */
-#define COLOR_PURPLE  (Color){128, 0, 128}
+#define COLOR_ROXO     (Color){128, 0, 128}
 /** @brief Cor ciano (RGB: 0, 255, 255). */
-#define COLOR_CYAN    (Color){0, 255, 255}
+#define COLOR_CIANO    (Color){0, 255, 255}
 /** @brief Cor branca (RGB: 255, 255, 255). */
-#define COLOR_WHITE   (Color){255, 255, 255}
+#define COLOR_BRANCO   (Color){255, 255, 255}
+/** @brief Cor nula  (Sem RGB-> (-10, -10, -10))*/
+#define COR_NULA       (Color){-10, -10, -10}
 /** @} */
 
 /** @defgroup VectorConstants Constantes de Vetores
@@ -120,8 +122,10 @@ typedef struct {
  */
 typedef struct {
     Pixel_Stack*** pixeis;  /**< Matriz de ponteiros para pilhas dinâmicas de pixeis */
-    Vector2 screen_size;
-    Vector2 position;
+    Color** buffer; /**< Matriz de buffer, representa a matriz de cores atualmente renderizada */
+    Vector2 screen_size; /**< Tamanho da tela em pixeis */
+    Vector2 position; /**< Posição absoluta da dela numa WorldPosition */
+    int limiar_de_cor; /**< Limita o quão iguais podem ser as cores que não haja re-print, para fins de otimização. */
 } Screen;
 
 /** @defgroup AnimationModel Modelo de Animação
@@ -203,7 +207,7 @@ char ler_teclado();
  * @param fundo Preenche a base da matriz de pilhas de pixeis com um retângulo monocromático com a cor 'fundo'
  * @return O objeto da tela, devidamente configurado
  */
-Screen* criar_tela(Vector2 tamanho, Color fundo);
+Screen* criar_tela(Vector2 tamanho, Color fundo, int limiar_de_cor);
 /** @} */
 
 /** @defgroup ScreenOperations Operações de Tela
@@ -494,10 +498,18 @@ void setup_animations(ObjetoComplexo* obj, Animation anims[], int qtd_anims);
  * @return O pixel no topo da pilha na posição dada
  */
 Pixel get_pixel_em(Screen* s, Vector2 pos);
-/** @brief Retorna true se vetor está dentro dos limites da tela. */
+/** @brief Retorna true se vetor está dentro dos limites do tamanho da tela. */
 bool vetor_valido_na_tela(Screen* s, Vector2 vet);
+/** @brief Retorna true se o vetor aponta para uma posição que a tela está renderizando no momento. (Se o vetor está visível na tela)
+ * @param out_pos_rel Ponteiro de saída para um vetor que sai do canto superior esquerdo e aponta para a posição vet (dentro do espaço (0, 0) até s.screen_size)
+ */
+bool vetor_aponta_para_area_visivel(Screen* s, Vector2 vet, Vector2* out_pos_rel);
 /** @brief Compara igualdade entre dois vetores. */
 bool compare_vector(Vector2 v1, Vector2 v2);
+/** @brief Compara duas cores, retornando o quadrado da distância entre elas. (0 se as cores forem iguais) */
+int compare_color(Color c1, Color c2);
+/** @brief Debug: printa os valores do vetor com um título precedendo-o */
+void print_vector(Vector2 v, char* name);
 /** @brief Verifica se objeto simples contém pixel em posição relativa dada. */
 bool obj_contem_Pixel_em(Objeto* obj, Vector2 pos);
 /**

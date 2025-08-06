@@ -14,12 +14,8 @@
 
 int main() 
 {
-    // 1. Inicialização com verificação de erro
-    Screen* tela = criar_tela(new_Vector2(100, 30), COLOR_WHITE);
-    if (!tela) {
-        fprintf(stderr, "Erro ao criar tela!\n");
-        return 1;
-    }
+    // 1. Inicialização
+    Screen* tela = criar_tela(new_Vector2(100, 30), COLOR_BRANCO, 25);
 
     // 2. Criação do objeto complexo com verificação
     ObjetoComplexo* personagem = criar_objeto_complexo_piskel(

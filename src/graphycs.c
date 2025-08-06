@@ -76,6 +76,11 @@ char ler_teclado()
     return ultima;
 }
 
+void print_vector(Vector2 v, char* name)
+{
+    printf("%s: (%d, %d)\n", name, v.x, v.y);
+}
+
 /**
  * @internal
  */
@@ -91,7 +96,7 @@ Color converter_ABGR_para_Color(uint32_t abgr)
 {
     uint8_t alpha = (abgr >> 24) & 0xFF;
     if(alpha == 0)
-        return COLOR_BLACK;
+        return COLOR_PRETO;
     
     uint8_t r = abgr & 0xFF; // Obtém o vermelho
     uint8_t g = (abgr >> 8)  & 0xFF; // Obtém o verde
@@ -282,7 +287,7 @@ Vector2 centro_da_tela(Screen* s)
 Pixel desempilhar_Pixel (Pixel_Stack* stack)
 {
     Pixel_Node* x = stack->topo;
-    Pixel noPixel = criar_Pixel(COLOR_BLACK, VETOR_NULO);
+    Pixel noPixel = criar_Pixel(COLOR_PRETO, VETOR_NULO);
     if (x == NULL) return noPixel;
     stack->topo = stack->topo->anterior;
     noPixel = x->pixel;
@@ -429,12 +434,12 @@ Objeto* criar_obj_eixos_debug(Screen* s)
     int idx = 0;
     int halfW = w/2;
     for (int dx = -halfW; dx < w - halfW; dx++) 
-        info[idx++] = criar_Pixel(COLOR_WHITE, new_Vector2(dx, 0));
+        info[idx++] = criar_Pixel(COLOR_BRANCO, new_Vector2(dx, 0));
     
     int halfH = h/2;
     for (int dy = -halfH; dy < h - halfH; dy++)
         if (dy != 0)
-            info[idx++] = criar_Pixel(COLOR_WHITE, new_Vector2(0, dy));
+            info[idx++] = criar_Pixel(COLOR_BRANCO, new_Vector2(0, dy));
     
     if (idx != total) {
         fprintf(stderr, "Debug-axes: esperado %d pixels mas gerou %d\n",
@@ -476,22 +481,28 @@ Objeto* merge_objeto (Objeto* prioridade, Objeto* novo, Vector2 pivot)
 Pixel deletar_Pixel (Screen* s, Vector2 pos) 
 {
     if (!vetor_valido_na_tela(s, pos)) 
-        return criar_Pixel(COLOR_BLACK, VETOR_NULO);
+        return criar_Pixel(COLOR_PRETO, VETOR_NULO);
     
     return desempilhar_Pixel(s->pixeis[pos.y][pos.x]);
 }
 
-Screen* criar_tela (Vector2 tamanho, Color fundo)
+Screen* criar_tela (Vector2 tamanho, Color fundo, int limiar_de_cor)
 {
     Screen* s = (Screen*)malloc(sizeof(Screen));
     s->screen_size = tamanho;
     s->position = VETOR_NULO;
     s->pixeis = (Pixel_Stack***)malloc(tamanho.y * sizeof(Pixel_Stack**));
+    s->buffer = (Color**)malloc(tamanho.y * sizeof(Color*));
+    s->limiar_de_cor = limiar_de_cor;
     for (int i = 0; i < tamanho.y; i++)
     {
         s->pixeis[i] = (Pixel_Stack**)malloc(tamanho.x * sizeof(Pixel_Stack*));
+        s->buffer[i] = (Color*)malloc(tamanho.x * sizeof(Color));
         for (int j = 0; j < tamanho.x; j++)
+        {
             s->pixeis[i][j] = criar_pilha();
+            s->buffer[i][j] = COR_NULA;
+        }
     }
     preencher_background(s, fundo);
     return s;
@@ -564,6 +575,14 @@ int* obj_complexo_contem_Pixel_em(ObjetoComplexo* obj, Vector2 pos, int* out_qtd
     return (int*)realloc(frames_que_contem, qtd_frames * sizeof(int));
 }
 
+bool vetor_aponta_para_area_visivel(Screen* s, Vector2 vet, Vector2* out_pos_rel)
+{
+    Vector2 rel = vector_sum(vector_subtr(vet, s->position), centro_da_tela(s));
+    if (out_pos_rel != NULL)
+        *out_pos_rel = rel;
+    return vetor_valido_na_tela(s, rel);
+}
+
 bool vetor_valido_na_tela(Screen *s, Vector2 vet)
 {
     if (vet.x < 0 || vet.x >= s->screen_size.x || 
@@ -577,6 +596,14 @@ bool compare_vector (Vector2 v1, Vector2 v2)
     bool x = v1.x == v2.x;
     bool y = v1.y == v2.y;
     return x && y;
+}
+
+int compare_color(Color c1, Color c2)
+{
+    int dist_r = (c1.r - c2.r) * (c1.r - c2.r);
+    int dist_g = (c1.g - c2.g) * (c1.g - c2.g);
+    int dist_b = (c1.b - c2.b) * (c1.b - c2.b);
+    return dist_r + dist_g + dist_b;
 }
 
 bool obj_contem_Pixel_em (Objeto* obj, Vector2 pos)
@@ -597,6 +624,7 @@ Pixel get_pixel_em(Screen* s, Vector2 pos)
     {
         moveCursor(new_Vector2(0, s->screen_size.y + 3));
         printf("Tentou obter pixel na posicao {%d, %d}, que está fora dos limites\n", rel_pos.x, rel_pos.y);
+        return (Pixel){};
     }
 }
 
@@ -951,18 +979,40 @@ void moveCursor(Vector2 v)
 
 void render(Screen* s, bool reset) 
 {
+    printf("\033[?25l");
     if (reset)
         moveCursor(VETOR_NULO);
-    
+
     for (int i = 0; i < s->screen_size.y; i++) 
     {
+        bool linha_igual = true;
         for (int j = 0; j < s->screen_size.x; j++) 
+        {
+            Color nova_cor = s->pixeis[i][j]->topo->pixel.cor;
+            if (compare_color(s->buffer[i][j], nova_cor) > s->limiar_de_cor || compare_color(s->buffer[i][j], COR_NULA) == 0)
+            {
+                linha_igual = false;
+                break;
+            }
+        }
+
+        if (linha_igual)
+        {
+            moveCursor((Vector2){0, i + 1});
+            continue;
+        }
+
+        moveCursor((Vector2){0, i});
+        for (int j = 0; j < s->screen_size.x; j++)
+        {
+            s->buffer[i][j] = s->pixeis[i][j]->topo->pixel.cor;
             printPixel(s->pixeis[i][j]);
-        printf("\n");
+        }
     }
     for (int i = 0; i < s->screen_size.x; i++)
         printf("-");
     printf("\n");
+    printf("\033[?25h");
 }
 
 void aplicar_filtro_obj_complexo (ObjetoComplexo* obj, Color filtro)

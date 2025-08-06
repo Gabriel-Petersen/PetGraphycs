@@ -6,8 +6,8 @@
 
 int main() 
 {
-    // 1. Cria a tela principal (120x30 pixels, fundo ciano)
-    Screen* tela = criar_tela(new_Vector2(120, 30), COLOR_CYAN);
+    // 1. Cria a tela principal (120x30 pixels, fundo ciano, 25 de limiar de cor)
+    Screen* tela = criar_tela(new_Vector2(120, 30), COLOR_CIANO, 25);
     if (!tela) 
     {
         fprintf(stderr, "Erro ao criar tela!\n");
@@ -15,7 +15,7 @@ int main()
     }
 
     // 2. Cria um quadrado vermelho (10x10 pixels)
-    Objeto* quadrado = criar_retangulo_monocromatico(COLOR_RED, new_Vector2(10, 10));
+    Objeto* quadrado = criar_retangulo_monocromatico(COLOR_VERMELHO, new_Vector2(10, 10));
     if (!quadrado) 
     {
         fprintf(stderr, "Erro ao criar objeto!\n");
