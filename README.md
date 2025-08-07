@@ -1,6 +1,6 @@
-/*! \mainpage Graphycs - Biblioteca Gráfica para Terminal
+\mainpage PetGraphycs - Biblioteca Gráfica para Terminal
 
-Biblioteca para criação de gráficos e animações em terminal usando caracteres coloridos como pixels.  
+Biblioteca para criação de gráficos e animações em terminal usando caracteres coloridos como pixeis.  
 Compatível com sprites exportados do [Piskel](https://www.piskelapp.com/).
 
 ## Como Compilar

@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['pivot_5fframes_0',['pivot_frames',['../struct_objeto_complexo.html#a2e7c7b6dda31db3a939af74f22d312a5',1,'ObjetoComplexo']]],
-  ['pixeis_1',['pixeis',['../struct_screen.html#aee6d9788023499469abc3d4332370478',1,'Screen']]],
-  ['pixel_2',['pixel',['../struct_pixel___node.html#a45c8020e4d91cc0521e86abb4e4bf1fd',1,'Pixel_Node']]],
-  ['position_3',['position',['../struct_pixel.html#a568c4f7cea202cebb7430ebac674107a',1,'Pixel::position'],['../struct_screen.html#a568c4f7cea202cebb7430ebac674107a',1,'Screen::position'],['../struct_objeto.html#a568c4f7cea202cebb7430ebac674107a',1,'Objeto::position'],['../struct_objeto_complexo.html#a568c4f7cea202cebb7430ebac674107a',1,'ObjetoComplexo::position']]]
+  ['obj_5fadress_0',['obj_adress',['../struct_obj___node.html#a25e7b1ef678061c4d133d7f9b0642715',1,'Obj_Node']]],
+  ['obj_5fsource_1',['obj_source',['../struct_pixel.html#ae8e23006ea7a73f1a74309c7e9f00873',1,'Pixel']]],
+  ['obj_5ftype_2',['obj_type',['../struct_obj___node.html#adc7a61009997b02af5aff7d823a2ca4d',1,'Obj_Node']]]
 ];

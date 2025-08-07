@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['nome_0',['nome',['../struct_animation.html#a9ccb3b1009c0baf8e49e38488c83732a',1,'Animation']]]
+  ['limiar_5fde_5fcor_0',['limiar_de_cor',['../struct_screen.html#a94d23c236790e4350efae57cce86c417',1,'Screen']]]
 ];

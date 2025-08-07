@@ -18,5 +18,6 @@ var searchData=
   ['diretas_20com_20pixels_15',['Operações Diretas com Pixels',['../group___pixel_operations.html',1,'']]],
   ['do_20arquivo_16',['1. Alteração do Arquivo',['../index.html#autotoc_md4',1,'']]],
   ['do_20piskel_17',['Usando Sprites do Piskel',['../index.html#autotoc_md3',1,'']]],
-  ['do_20projeto_18',['1. Estrutura do Projeto',['../index.html#autotoc_md1',1,'']]]
+  ['do_20projeto_18',['1. Estrutura do Projeto',['../index.html#autotoc_md1',1,'']]],
+  ['documentação_19',['Documentação',['../index.html#autotoc_md7',1,'']]]
 ];

@@ -25,23 +25,22 @@
 var NAVTREE =
 [
   [ "PetGraphycs", "index.html", [
-    [ "Graphycs - Biblioteca Gráfica para Terminal", "index.html", null ],
-    [ "README", "md__r_e_a_d_m_e.html", null ],
-    [ "Topics", "topics.html", "topics" ],
-    [ "Data Structures", "annotated.html", [
-      [ "Data Structures", "annotated.html", "annotated_dup" ],
-      [ "Data Structure Index", "classes.html", null ],
-      [ "Data Fields", "functions.html", [
-        [ "All", "functions.html", null ],
-        [ "Variables", "functions_vars.html", null ]
+    [ "PetGraphycs - Biblioteca Gráfica para Terminal", "index.html", null ],
+    [ "Tópicos", "topics.html", "topics" ],
+    [ "Estruturas de dados", "annotated.html", [
+      [ "Estruturas de dados", "annotated.html", "annotated_dup" ],
+      [ "Índice das estruturas de dados", "classes.html", null ],
+      [ "Campos de dados", "functions.html", [
+        [ "Tudo", "functions.html", null ],
+        [ "Variáveis", "functions_vars.html", null ]
       ] ]
     ] ],
-    [ "Files", "files.html", [
-      [ "File List", "files.html", "files_dup" ],
-      [ "Globals", "globals.html", [
-        [ "All", "globals.html", null ],
-        [ "Functions", "globals_func.html", null ],
-        [ "Typedefs", "globals_type.html", null ],
+    [ "Ficheiros", "files.html", [
+      [ "Lista de ficheiros", "files.html", "files_dup" ],
+      [ "Globais", "globals.html", [
+        [ "Tudo", "globals.html", null ],
+        [ "Funções", "globals_func.html", null ],
+        [ "Definições de tipos", "globals_type.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
@@ -53,6 +52,6 @@ var NAVTREEINDEX =
 "01__basico_8c.html"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronization';
-var SYNCOFFMSG = 'click to enable panel synchronization';
-var LISTOFALLMEMBERS = 'List of all members';
+var SYNCONMSG = 'clique para desativar a sincronização do painel';
+var SYNCOFFMSG = 'clique para ativar a sincronização do painel';
+var LISTOFALLMEMBERS = 'Mostrar lista completa dos membros';

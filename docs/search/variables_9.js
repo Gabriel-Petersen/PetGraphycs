@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['qtd_5fanims_0',['qtd_anims',['../struct_animation_manager.html#ac006accbd9c6246bd65bed82b4d02ab5',1,'AnimationManager']]],
-  ['qtd_5fframes_1',['qtd_frames',['../struct_animation.html#a440eeaa88904f349722855580d73ea89',1,'Animation::qtd_frames'],['../struct_objeto_complexo.html#a440eeaa88904f349722855580d73ea89',1,'ObjetoComplexo::qtd_frames']]],
-  ['qtd_5fpixel_2',['qtd_Pixel',['../struct_objeto.html#aec3b6cff731da14ce05853b5eb9b62fe',1,'Objeto']]]
+  ['pivot_5fframes_0',['pivot_frames',['../struct_objeto_complexo.html#a2e7c7b6dda31db3a939af74f22d312a5',1,'ObjetoComplexo']]],
+  ['pixeis_1',['pixeis',['../struct_screen.html#aee6d9788023499469abc3d4332370478',1,'Screen']]],
+  ['pixel_2',['pixel',['../struct_pixel___node.html#a45c8020e4d91cc0521e86abb4e4bf1fd',1,'Pixel_Node']]],
+  ['position_3',['position',['../struct_pixel.html#a568c4f7cea202cebb7430ebac674107a',1,'Pixel::position'],['../struct_screen.html#a568c4f7cea202cebb7430ebac674107a',1,'Screen::position'],['../struct_objeto.html#a568c4f7cea202cebb7430ebac674107a',1,'Objeto::position'],['../struct_objeto_complexo.html#a568c4f7cea202cebb7430ebac674107a',1,'ObjetoComplexo::position']]]
 ];

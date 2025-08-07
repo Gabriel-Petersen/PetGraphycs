@@ -489,7 +489,7 @@ void setup_animations(ObjetoComplexo* obj, Animation anims[], int qtd_anims);
 /** @} */
 
 /** @defgroup QueryFunctions Consultas e Predicados
- *  @brief Verificações de limites e presença de pixels
+ *  @brief Verificações de limites e presença de pixeis, vetores e cores
  *  @{
  */
 /** @brief retorna o pixel que está no topo da pilha na posição relativa à tela dada

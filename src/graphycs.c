@@ -105,6 +105,18 @@ Color converter_ABGR_para_Color(uint32_t abgr)
     return criar_cor(r, g, b);
 }
 
+
+/**
+ * @internal
+ */
+bool color_equals (Color c1, Color c2)
+{
+    bool r = c1.r == c2.r;
+    bool g = c1.g == c2.g;
+    bool b = c1.b == c2.b;
+    return r && g && b;
+}
+
 Color criar_cor(int r, int g, int b) {
     return (Color){r, g, b};
 }
@@ -600,6 +612,7 @@ bool compare_vector (Vector2 v1, Vector2 v2)
 
 int compare_color(Color c1, Color c2)
 {
+    if (color_equals(c1, COR_NULA) || color_equals(c2, COR_NULA)) return INT32_MAX;
     int dist_r = (c1.r - c2.r) * (c1.r - c2.r);
     int dist_g = (c1.g - c2.g) * (c1.g - c2.g);
     int dist_b = (c1.b - c2.b) * (c1.b - c2.b);
@@ -926,11 +939,15 @@ void preencher_background (Screen* s, Color cor)
             add_Pixel(s->pixeis[i][j], criar_Pixel(cor, new_Vector2(i, j)));
 }
 
-void printPixel(Pixel_Stack* p) 
+void printPixel(Pixel_Stack* p, int limiar_de_cor, Color cor_anterior)
 {
     if (p == NULL || p->topo == NULL) return;
     Color c = p->topo->pixel.cor;
-    printf("\033[38;2;%d;%d;%dm@\033[0m", c.r, c.g, c.b);
+
+    if (compare_color(c, cor_anterior) > limiar_de_cor) 
+        printf("\033[38;2;%d;%d;%dm", c.r, c.g, c.b);
+    
+    printf("@");
 }
 
 void mover_objeto_complexo(Screen* s, ObjetoComplexo* obj, Vector2 direction)
@@ -982,6 +999,9 @@ void render(Screen* s, bool reset)
     printf("\033[?25l");
     if (reset)
         moveCursor(VETOR_NULO);
+    
+    char primeiroPrint = '1';
+    Color cor_anterior = COR_NULA;
 
     for (int i = 0; i < s->screen_size.y; i++) 
     {
@@ -989,7 +1009,7 @@ void render(Screen* s, bool reset)
         for (int j = 0; j < s->screen_size.x; j++) 
         {
             Color nova_cor = s->pixeis[i][j]->topo->pixel.cor;
-            if (compare_color(s->buffer[i][j], nova_cor) > s->limiar_de_cor || compare_color(s->buffer[i][j], COR_NULA) == 0)
+            if (compare_color(s->buffer[i][j], nova_cor) > s->limiar_de_cor)
             {
                 linha_igual = false;
                 break;
@@ -1006,9 +1026,11 @@ void render(Screen* s, bool reset)
         for (int j = 0; j < s->screen_size.x; j++)
         {
             s->buffer[i][j] = s->pixeis[i][j]->topo->pixel.cor;
-            printPixel(s->pixeis[i][j]);
+            printPixel(s->pixeis[i][j], s->limiar_de_cor, cor_anterior);
+            cor_anterior = s->buffer[i][j];
         }
     }
+    printf("\033[0m\n");
     for (int i = 0; i < s->screen_size.x; i++)
         printf("-");
     printf("\n");
