@@ -28,7 +28,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.avif"/></td>
   <td id="projectalign">
-   <div id="projectname">PetGraphycs<span id="projectnumber">&#160;beta1.5</span>
+   <div id="projectname">PetGraphycs<span id="projectnumber">&#160;beta1.8</span>
    </div>
    <div id="projectbrief">Uma simples biblioteca gráfica de terminal em C</div>
   </td>
@@ -117,16 +117,20 @@ Estruturas de Dados</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nodo da pilha dinâmica de pixeis.  <a href="struct_pixel___node.html#details">Mais...</a><br /></td></tr>
 <tr class="memitem:Pixel_5FStack" id="r_Pixel_5FStack"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_pixel___stack.html">Pixel_Stack</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estrutura que representa a pilha de pixeis de cada posição da tela. Cada coordenada empilha pixeis e renderiza o do topo.  <a href="struct_pixel___stack.html#details">Mais...</a><br /></td></tr>
-<tr class="memitem:Screen" id="r_Screen"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_screen.html">Screen</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estrutura da tela sob a qual os objetos serão renderizados.  <a href="struct_screen.html#details">Mais...</a><br /></td></tr>
 <tr class="memitem:Animation" id="r_Animation"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_animation.html">Animation</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Representa uma animação específica de um <a class="el" href="struct_objeto_complexo.html" title="Representa um objeto com múltiplos frames e animações (ex: personagens de jogos).">ObjetoComplexo</a>.  <a href="struct_animation.html#details">Mais...</a><br /></td></tr>
 <tr class="memitem:AnimationManager" id="r_AnimationManager"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_animation_manager.html">AnimationManager</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gerencia múltiplas animações de um <a class="el" href="struct_objeto_complexo.html" title="Representa um objeto com múltiplos frames e animações (ex: personagens de jogos).">ObjetoComplexo</a>.  <a href="struct_animation_manager.html#details">Mais...</a><br /></td></tr>
+<tr class="memitem:ObjNode" id="r_ObjNode"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_obj_node.html">ObjNode</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Representa um nodo de uma lista encadeada para os objetos de uma tela.  <a href="struct_obj_node.html#details">Mais...</a><br /></td></tr>
+<tr class="memitem:Obj_5FLinked_5FList" id="r_Obj_5FLinked_5FList"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_obj___linked___list.html">Obj_Linked_List</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Representa uma lista encadeada de objetos atrelada a uma tela.  <a href="struct_obj___linked___list.html#details">Mais...</a><br /></td></tr>
 <tr class="memitem:Objeto" id="r_Objeto"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_objeto.html">Objeto</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Representa um objeto gráfico estático (um único frame).  <a href="struct_objeto.html#details">Mais...</a><br /></td></tr>
 <tr class="memitem:ObjetoComplexo" id="r_ObjetoComplexo"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_objeto_complexo.html">ObjetoComplexo</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Representa um objeto com múltiplos frames e animações (ex: personagens de jogos).  <a href="struct_objeto_complexo.html#details">Mais...</a><br /></td></tr>
+<tr class="memitem:Screen" id="r_Screen"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_screen.html">Screen</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estrutura da tela sob a qual os objetos serão renderizados.  <a href="struct_screen.html#details">Mais...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
@@ -163,6 +167,8 @@ Macros</h2></td></tr>
 Definições de tipos</h2></td></tr>
 <tr class="memitem:ga69c96aaae3394504f2b97621e2a7ca65" id="r_ga69c96aaae3394504f2b97621e2a7ca65"><td class="memItemLeft" align="right" valign="top">typedef struct Pixel_Node&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___pixel_model.html#ga69c96aaae3394504f2b97621e2a7ca65">Pixel_Node</a></td></tr>
 <tr class="memdesc:ga69c96aaae3394504f2b97621e2a7ca65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nodo da pilha dinâmica de pixeis.  <br /></td></tr>
+<tr class="memitem:gaeafe80e30242f18b9b3eff5dd7bc0414" id="r_gaeafe80e30242f18b9b3eff5dd7bc0414"><td class="memItemLeft" align="right" valign="top">typedef struct ObjNode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___object_model.html#gaeafe80e30242f18b9b3eff5dd7bc0414">ObjNode</a></td></tr>
+<tr class="memdesc:gaeafe80e30242f18b9b3eff5dd7bc0414"><td class="mdescLeft">&#160;</td><td class="mdescRight">Representa um nodo de uma lista encadeada para os objetos de uma tela.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Funções</h2></td></tr>
@@ -171,6 +177,7 @@ Funções</h2></td></tr>
 <tr class="memitem:ga0512a73dfbcb6c0a9f2f7b33089d7983" id="r_ga0512a73dfbcb6c0a9f2f7b33089d7983"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_screen.html">Screen</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___input_output.html#ga0512a73dfbcb6c0a9f2f7b33089d7983">criar_tela</a> (<a class="el" href="struct_vector2.html">Vector2</a> tamanho, <a class="el" href="struct_color.html">Color</a> fundo, int limiar_de_cor)</td></tr>
 <tr class="memdesc:ga0512a73dfbcb6c0a9f2f7b33089d7983"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cria o objeto de tela que será renderizado.  <br /></td></tr>
 <tr class="memitem:gac7b8de36e2c6e8c3475fdfff15accf67" id="r_gac7b8de36e2c6e8c3475fdfff15accf67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___screen_operations.html#gac7b8de36e2c6e8c3475fdfff15accf67">mover_tela</a> (<a class="el" href="struct_screen.html">Screen</a> *s, <a class="el" href="struct_vector2.html">Vector2</a> direction)</td></tr>
+<tr class="memdesc:gac7b8de36e2c6e8c3475fdfff15accf67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move a tela através do WorldSpace.  <br /></td></tr>
 <tr class="memitem:gafce1454fe8146ebed90aa99e3ef672a5" id="r_gafce1454fe8146ebed90aa99e3ef672a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___screen_operations.html#gafce1454fe8146ebed90aa99e3ef672a5">preencher_background</a> (<a class="el" href="struct_screen.html">Screen</a> *s, <a class="el" href="struct_color.html">Color</a> cor)</td></tr>
 <tr class="memdesc:gafce1454fe8146ebed90aa99e3ef672a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Preenche toda a tela com uma cor de fundo.  <br /></td></tr>
 <tr class="memitem:gaec4dc4a926c26cdfe7ffdbbb1d40b606" id="r_gaec4dc4a926c26cdfe7ffdbbb1d40b606"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___screen_operations.html#gaec4dc4a926c26cdfe7ffdbbb1d40b606">render</a> (<a class="el" href="struct_screen.html">Screen</a> *s, bool reset)</td></tr>

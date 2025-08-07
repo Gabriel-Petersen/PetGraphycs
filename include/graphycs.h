@@ -69,12 +69,12 @@ typedef struct {
 #define VETOR_NULO (Vector2){0, 0}
 /**
  * @brief Vetor unitário para cima (0, -1).
- * @note O eixo Y cresce para baixo em muitos sistemas gráficos.
+ * @note O eixo Y cresce para baixo neste sistema gráfico.
  */
 #define VETOR_CIMA (Vector2){0, -1}
 /**
  * @brief Vetor unitário para baixo (0, 1).
- * @note O eixo Y cresce para baixo em muitos sistemas gráficos.
+ * @note O eixo Y cresce para baixo neste sistema gráfico.
  */
 #define VETOR_BAIXO (Vector2){0, 1}
 /**
@@ -87,7 +87,6 @@ typedef struct {
 #define VETOR_DIREITA (Vector2){1, 0}
 /** @} */
 
-
 /** @defgroup PixelModel Modelo de Pixel
  *  @brief Definição de Pixel, nó e pilha de pixels
  *  @{
@@ -99,8 +98,6 @@ typedef struct {
 typedef struct {
     Color cor;      /**< Cor do pixel. */
     Vector2 position; /**< Posição do pixel. */
-    void** obj_source; /**< Objeto ou ObjetoComplexo de onde veio este pixel*/
-    char source_type; /**< 'o' para Objeto; 'c' para ObjetoComplexo */
 } Pixel;
 /**
  * @brief Nodo da pilha dinâmica de pixeis
@@ -116,17 +113,7 @@ typedef struct {
     Pixel_Node* topo;
 } Pixel_Stack;
 /** @} */
-/**
- * @brief Estrutura da tela sob a qual os objetos serão renderizados
- * @details Defina o tamanho da tela de acordo com o tamanho do monitor/terminal a ser utilizado
- */
-typedef struct {
-    Pixel_Stack*** pixeis;  /**< Matriz de ponteiros para pilhas dinâmicas de pixeis */
-    Color** buffer; /**< Matriz de buffer, representa a matriz de cores atualmente renderizada */
-    Vector2 screen_size; /**< Tamanho da tela em pixeis */
-    Vector2 position; /**< Posição absoluta da dela numa WorldPosition */
-    int limiar_de_cor; /**< Limita o quão iguais podem ser as cores que não haja re-print, para fins de otimização. */
-} Screen;
+
 
 /** @defgroup AnimationModel Modelo de Animação
  *  @brief Estruturas para frames e gerenciador de animações
@@ -163,6 +150,26 @@ typedef struct {
  *  @{
  */
 /**
+ * @brief Representa um nodo de uma lista encadeada para os objetos de uma tela
+ * @details Cada nodo armazena a referência a qualquer um dos tipos de objeto - atualizada internamente
+ * @internal
+ */
+typedef struct ObjNode {
+    void* obj_ref;        /**< Ponteiro para o objeto armazenado no nodo. Requer casting */
+    char obj_type;        /**< Identificador: 'o' para Objeto; 'c' para ObjetoComplexo */
+    struct ObjNode* ant;  /**< Ponteiro para o nodo anterior (ou NULL) */
+    struct ObjNode* prox; /**< Ponteiro para o próximo nodo (ou NULL) */
+} ObjNode;
+/**
+ * @brief Representa uma lista encadeada de objetos atrelada a uma tela
+ * @details Cada tela possui uma lista dessas que guarda todos os objetos que não estão escondidos na WorldPos.
+ * @internal
+ */
+typedef struct {
+    int qtd;              /**< Quantidade de objetos armazenados na lista */
+    ObjNode* inicio;      /**< Ponteiro para o início da lista */
+} Obj_Linked_List;
+/**
  * @brief Representa um objeto gráfico estático (um único frame).
  * @details Um objeto é um conjunto de pixels cujas posições são relativas à posição do objeto.
  */
@@ -172,6 +179,7 @@ typedef struct {
     Vector2 size;       /**< Dimensões do objeto (largura, altura). */
     int qtd_Pixel;      /**< Quantidade de pixeis no objeto. */
     bool renderizado;   /**< Flag que indica se o objeto está renderizado. */
+    ObjNode* ref_node;
 } Objeto;
 
 /**
@@ -179,16 +187,31 @@ typedef struct {
  * @details Um ObjetoComplexo é um "vetor de Objetos", onde cada Objeto é um frame. O AnimationManager controla quais frames compõem cada animação.
  */
 typedef struct {
-    Vector2 position;           /**< Posição global do objeto. */
-    Vector2* pivot_frames;      /**< Pontos de pivô customizados para cada frame (opcional, default = VETOR_NULO). */
-    Objeto** frames;           /**< Array de ponteiros para Objetos (frames individuais). */
+    Vector2 position;               /**< Posição global do objeto. */
+    Vector2* pivot_frames;          /**< Array de pontos de pivô customizados para cada frame (default = VETOR_NULO). */
+    Objeto** frames;                /**< Array de ponteiros para Objetos (frames individuais). */
     AnimationManager* anim_manager; /**< Gerenciador de animações. */
-    Vector2 size;              /**< Dimensões do objeto. */
-    bool renderizado;          /**< Flag de renderização. */
-    bool animar;               /**< Se verdadeiro, avança automaticamente os frames. */
-    int qtd_frames;            /**< Quantidade total de frames. */
-    int frame_atual;           /**< Frame atual sendo exibido. */
+    Vector2 size;                   /**< Dimensões do objeto. */
+    bool renderizado;               /**< Flag de renderização. */
+    bool animar;                    /**< Se verdadeiro, avança automaticamente os frames. */
+    int qtd_frames;                 /**< Quantidade total de frames. */
+    int frame_atual;                /**< Frame atual sendo exibido. */
+    ObjNode* ref_node;
 } ObjetoComplexo;
+/** @} */
+
+/**
+ * @brief Estrutura da tela sob a qual os objetos serão renderizados
+ * @details Defina o tamanho da tela de acordo com o tamanho do monitor/terminal a ser utilizado
+ */
+typedef struct {
+    Pixel_Stack*** pixeis;  /**< Matriz de ponteiros para pilhas dinâmicas de pixeis */
+    Color** buffer; /**< Matriz de buffer, representa a matriz de cores atualmente renderizada */
+    Vector2 screen_size; /**< Tamanho da tela em pixeis */
+    Vector2 position; /**< Posição absoluta da dela numa WorldPosition */
+    int limiar_de_cor; /**< Limita o quão iguais podem ser as cores que não haja re-print, para fins de otimização. */
+    Obj_Linked_List* obj_list; /**< Lista interna de objetos não-escondidos da tela */
+} Screen;
 /** @} */
 
 /** @defgroup InputOutput Entrada e Saída
@@ -213,6 +236,11 @@ Screen* criar_tela(Vector2 tamanho, Color fundo, int limiar_de_cor);
 /** @defgroup ScreenOperations Operações de Tela
  *  @brief Movimentação, limpeza e renderização
  *  @{
+ */
+/**
+ * @brief Move a tela através do WorldSpace
+ * @param s Ponteiro para a tela.
+ * @param direction Direção na qual a tela se moverá
  */
 void mover_tela (Screen* s, Vector2 direction);
 /**

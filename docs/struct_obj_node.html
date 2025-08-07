@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PetGraphycs: Referência à estrutura Vector2</title>
+<title>PetGraphycs: Referência à estrutura ObjNode</title>
 <link rel="icon" href="logo.jpg" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -65,7 +65,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('struct_vector2.html','',''); });
+$(function(){initNavTree('struct_obj_node.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -91,50 +91,83 @@ $(function(){initNavTree('struct_vector2.html','',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">Referência à estrutura Vector2<div class="ingroups"><a class="el" href="group___basic_types.html">Tipos Básicos</a></div></div></div>
+  <div class="headertitle"><div class="title">Referência à estrutura ObjNode<div class="ingroups"><a class="el" href="group___object_model.html">Modelo de Objetos</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Estrutura para coordenadas 2D (x, y).  
+<p>Representa um nodo de uma lista encadeada para os objetos de uma tela.  
  <a href="#details">Mais...</a></p>
 
 <p><code>#include &lt;<a class="el" href="graphycs_8h_source.html">graphycs.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Campos de Dados</h2></td></tr>
-<tr class="memitem:a6150e0515f7202e2fb518f7206ed97dc" id="r_a6150e0515f7202e2fb518f7206ed97dc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6150e0515f7202e2fb518f7206ed97dc">x</a></td></tr>
-<tr class="memitem:a0a2f84ed7838f07779ae24c5a9086d33" id="r_a0a2f84ed7838f07779ae24c5a9086d33"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a2f84ed7838f07779ae24c5a9086d33">y</a></td></tr>
+<tr class="memitem:a36ca1f115c6b9300e117689cfc600648" id="r_a36ca1f115c6b9300e117689cfc600648"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a36ca1f115c6b9300e117689cfc600648">obj_ref</a></td></tr>
+<tr class="memitem:adc7a61009997b02af5aff7d823a2ca4d" id="r_adc7a61009997b02af5aff7d823a2ca4d"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adc7a61009997b02af5aff7d823a2ca4d">obj_type</a></td></tr>
+<tr class="memitem:a68439b9bf97f829b7cf5c0ddd82f4a12" id="r_a68439b9bf97f829b7cf5c0ddd82f4a12"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_obj_node.html">ObjNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a68439b9bf97f829b7cf5c0ddd82f4a12">ant</a></td></tr>
+<tr class="memitem:ac7c837e56445e1d3ff84a33348881e84" id="r_ac7c837e56445e1d3ff84a33348881e84"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_obj_node.html">ObjNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac7c837e56445e1d3ff84a33348881e84">prox</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descrição detalhada</h2>
-<div class="textblock"><p>Estrutura para coordenadas 2D (x, y). </p>
+<div class="textblock"><p>Representa um nodo de uma lista encadeada para os objetos de uma tela. </p>
+<p>Cada nodo armazena a referência a qualquer um dos tipos de objeto - atualizada internamente </p>
 </div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Documentação dos campos e atributos</h2>
-<a id="a6150e0515f7202e2fb518f7206ed97dc" name="a6150e0515f7202e2fb518f7206ed97dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6150e0515f7202e2fb518f7206ed97dc">&#9670;&#160;</a></span>x</h2>
+<a id="a68439b9bf97f829b7cf5c0ddd82f4a12" name="a68439b9bf97f829b7cf5c0ddd82f4a12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68439b9bf97f829b7cf5c0ddd82f4a12">&#9670;&#160;</a></span>ant</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int x</td>
+          <td class="memname">struct <a class="el" href="struct_obj_node.html">ObjNode</a>* ant</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Coordenada horizontal (sentido convencional). </p>
+<p>Ponteiro para o nodo anterior (ou NULL) </p>
 
 </div>
 </div>
-<a id="a0a2f84ed7838f07779ae24c5a9086d33" name="a0a2f84ed7838f07779ae24c5a9086d33"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a2f84ed7838f07779ae24c5a9086d33">&#9670;&#160;</a></span>y</h2>
+<a id="a36ca1f115c6b9300e117689cfc600648" name="a36ca1f115c6b9300e117689cfc600648"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36ca1f115c6b9300e117689cfc600648">&#9670;&#160;</a></span>obj_ref</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int y</td>
+          <td class="memname">void* obj_ref</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Coordenada vertical (sentido invertido). </p>
+<p>Ponteiro para o objeto armazenado no nodo. Requer casting </p>
+
+</div>
+</div>
+<a id="adc7a61009997b02af5aff7d823a2ca4d" name="adc7a61009997b02af5aff7d823a2ca4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc7a61009997b02af5aff7d823a2ca4d">&#9670;&#160;</a></span>obj_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char obj_type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Identificador: 'o' para <a class="el" href="struct_objeto.html" title="Representa um objeto gráfico estático (um único frame).">Objeto</a>; 'c' para <a class="el" href="struct_objeto_complexo.html" title="Representa um objeto com múltiplos frames e animações (ex: personagens de jogos).">ObjetoComplexo</a> </p>
+
+</div>
+</div>
+<a id="ac7c837e56445e1d3ff84a33348881e84" name="ac7c837e56445e1d3ff84a33348881e84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7c837e56445e1d3ff84a33348881e84">&#9670;&#160;</a></span>prox</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_obj_node.html">ObjNode</a>* prox</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Ponteiro para o próximo nodo (ou NULL) </p>
 
 </div>
 </div>
@@ -154,7 +187,7 @@ Campos de Dados</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="struct_vector2.html">Vector2</a></li>
+    <li class="navelem"><a href="struct_obj_node.html">ObjNode</a></li>
     <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
   </ul>
 </div>

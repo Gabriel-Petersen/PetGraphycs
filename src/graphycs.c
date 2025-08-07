@@ -10,61 +10,57 @@
 #include <math.h>
 #include "graphycs.h"
 
-/**
- * @internal
- */
-typedef struct Obj_Node {
-    void** obj_adress;
-    char obj_type;
-    struct Obj_Node* anterior;
-} Obj_Node;
-/**
- * @internal
- */
-typedef struct {
-    Obj_Node* topo;
-} Obj_Stack;
-/**
- * @internal
- */
-static Obj_Stack* criar_obj_stack()
+static Obj_Linked_List* criar_lista_objetos ()
 {
-    Obj_Stack* stack = (Obj_Stack*)malloc(sizeof(Obj_Stack));
-    stack->topo = NULL;
-    return stack;
+    Obj_Linked_List* ol = (Obj_Linked_List*)malloc(sizeof(Obj_Linked_List));
+    ol->inicio = NULL;
+    ol->qtd = 0;
+    return ol;
 }
-/**
- * @internal
- */
-Obj_Node pop_obj(Obj_Stack* stack)
-{
-    Obj_Node topo = (Obj_Node){NULL, 'n', NULL};
-    if (stack->topo == NULL) return topo;
-    Obj_Node* x = stack->topo;
-    stack->topo = x->anterior;
-    topo = *x;
-    free(x);
-    return topo;
-}
-/**
- * @internal
- */
-void push_Obj(Obj_Stack* stack, void **obj, char obj_type) 
-{
-    Obj_Node* atual = stack->topo;
-    while (atual != NULL) 
-    {
-        if (atual->obj_adress == obj) 
-            return;
-        atual = atual->anterior;
-    }
-    
-    Obj_Node* novo = (Obj_Node*)malloc(sizeof(Obj_Node));
 
-    novo->obj_adress = obj;
-    novo->obj_type = obj_type;
-    novo->anterior = stack->topo;
-    stack->topo = novo;
+static void remover_da_lista (Obj_Linked_List* ol, ObjNode* nodo)
+{
+    if (nodo == NULL)
+    {
+        printf("Erro interno, tentando removendo nodo nulo!!!\n");
+        return;
+    }
+
+    if (nodo->ant != NULL)
+        nodo->ant->prox = nodo->prox;
+    else
+        ol->inicio = nodo->prox;
+    
+    if (nodo->prox != NULL)
+        nodo->prox->ant = nodo->ant;
+    ol->qtd--;
+    free(nodo);
+}
+
+static void incluir_na_lista (Obj_Linked_List* obj_list, void* obj_ptr, char obj_type)
+{
+    ObjNode* novo_nodo = (ObjNode*)malloc(sizeof(ObjNode));
+    if (obj_list->inicio != NULL)
+        obj_list->inicio->ant = novo_nodo;
+    novo_nodo->prox = obj_list->inicio;
+    novo_nodo->ant = NULL;
+    novo_nodo->obj_type = obj_type;
+    if (obj_type == 'o')
+    {
+        novo_nodo->obj_ref = (Objeto*)obj_ptr;
+        ((Objeto*)obj_ptr)->ref_node = novo_nodo;
+    }
+    else if (obj_type == 'c')
+    {
+        novo_nodo->obj_ref = (ObjetoComplexo*)obj_ptr;
+        ((ObjetoComplexo*)obj_ptr)->ref_node = novo_nodo;
+    }
+    else
+    {
+        printf("ERRO: Objeto possui char de flag = %c - só é permitido 'o' ou 'c'\n", obj_type);
+    }
+    obj_list->inicio = novo_nodo;
+    obj_list->qtd++;
 }
 
 char ler_teclado()
@@ -81,18 +77,12 @@ void print_vector(Vector2 v, char* name)
     printf("%s: (%d, %d)\n", name, v.x, v.y);
 }
 
-/**
- * @internal
- */
-int next_anim(Animation* anim)
+static int next_anim(Animation* anim)
 {
     return (anim->frame_atual + 1 == anim->qtd_frames) ? 0 : anim->frame_atual + 1;
 }
 
-/**
- * @internal
- */
-Color converter_ABGR_para_Color(uint32_t abgr) 
+static Color converter_ABGR_para_Color(uint32_t abgr) 
 {
     uint8_t alpha = (abgr >> 24) & 0xFF;
     if(alpha == 0)
@@ -106,10 +96,7 @@ Color converter_ABGR_para_Color(uint32_t abgr)
 }
 
 
-/**
- * @internal
- */
-bool color_equals (Color c1, Color c2)
+static bool color_equals (Color c1, Color c2)
 {
     bool r = c1.r == c2.r;
     bool g = c1.g == c2.g;
@@ -178,8 +165,7 @@ Vector2 get_complexo_abs_Pixel_pos(ObjetoComplexo* obj, int frame, int index)
     );
 }
 
-//INTERNA
-Vector2 aplicar_matriz_rot (Vector2 Pixel_pos, Vector2 rot_pivo, float graus)
+static Vector2 aplicar_matriz_rot (Vector2 Pixel_pos, Vector2 rot_pivo, float graus)
 {
     float radianos = graus * M_PI/180.0;
     float x_rel = Pixel_pos.x - rot_pivo.x;
@@ -196,8 +182,7 @@ Pixel criar_Pixel (Color cor, Vector2 pos)
     Pixel p;
     p.cor = cor;
     p.position = pos;
-    p.obj_source = NULL;
-    p.source_type = 'n';
+
     return p;
 }
 
@@ -219,63 +204,50 @@ static Pixel_Node* criar_nodo (Pixel p)
     return n;
 }
 
-void add_Pixel (Pixel_Stack* stack, Pixel p)
+static void add_Pixel (Pixel_Stack* stack, Pixel p)
 {
     Pixel_Node* x = criar_nodo(p);
     x->anterior = stack->topo;
     stack->topo = x;
 }
 
-void limpar_pilha(Pixel_Stack* pixel_stack, Obj_Stack* obj_stack)
-{
-    if (pixel_stack == NULL || pixel_stack->topo == NULL)
-        return;
-
-    Pixel_Node* atual = pixel_stack->topo;
-    Pixel ultimo_px = atual->pixel;
-    Pixel_Node* anterior;
-
-    while (atual != NULL) 
-    {
-        if (atual->pixel.obj_source)
-            push_Obj(obj_stack, atual->pixel.obj_source, atual->pixel.source_type);
-        
-        ultimo_px = atual->pixel;
-        anterior = atual->anterior;
-        free(atual);
-        atual = anterior;
-    }
-
-    pixel_stack->topo = NULL;
-    add_Pixel(pixel_stack, ultimo_px);
-}
-
 void mover_tela (Screen* s, Vector2 direction)
 {
-    s->position = vector_sum(s->position, direction);
-    Obj_Stack* pilha = criar_obj_stack();
-
     for (int i = 0; i < s->screen_size.y; i++) for (int j = 0; j < s->screen_size.x; j++)
-        limpar_pilha(s->pixeis[i][j], pilha);
-    
-    while (pilha->topo != NULL)
     {
-        Obj_Node node = pop_obj(pilha);
-
-        if (node.obj_type == 'o') 
+        Pixel_Stack* stack = s->pixeis[i][j];
+        while (stack->topo->anterior != NULL)
         {
-            Objeto* o = (Objeto*)node.obj_adress;
-            o->renderizado = false;
-            desenhar_objeto(s, o);
-        }
-        else if (node.obj_type == 'c') 
-        {
-            ObjetoComplexo* oc = (ObjetoComplexo*)node.obj_adress;
-            oc->renderizado = false;
-            desenhar_objeto_complexo(s, oc);
+            desempilhar_Pixel(stack);
         }
     }
-    free(pilha);
+
+    s->position = vector_sum(s->position, direction);
+
+    ObjNode* atual = s->obj_list->inicio;
+    while (atual != NULL)
+    {
+        if (atual->obj_type == 'o')
+        {
+            Objeto* obj = (Objeto*)atual->obj_ref;
+            obj->renderizado = false;
+            desenhar_objeto(s, obj);
+            obj->renderizado = true;
+        }
+        else if (atual->obj_type == 'c')
+        {
+            ObjetoComplexo* objC = (ObjetoComplexo*)atual->obj_ref;
+            objC->renderizado = false;
+            desenhar_objeto_complexo(s, objC);
+            objC->renderizado = true;
+        }
+        atual = atual->prox;
+    }
+
+    for (int i = 0; i < s->screen_size.y; i++) for (int j = 0; j < s->screen_size.x; j++)
+    {
+        s->buffer[i][j] = COR_NULA;
+    }
 }
 
 Vector2 get_abs_Pixel_pos (Objeto* obj, int index)
@@ -362,6 +334,7 @@ Objeto* criar_objeto_custom (Pixel* info, int qtd_Pixel, bool normalizar)
     o->position = VETOR_NULO;
     o->qtd_Pixel = qtd_Pixel;
     o->renderizado = false;
+    o->ref_node = NULL;
     Vector2 menor = info[0].position;
     Vector2 maior = VETOR_NULO;
     for (int i = 0; i < qtd_Pixel; i++)
@@ -380,11 +353,7 @@ Objeto* criar_objeto_custom (Pixel* info, int qtd_Pixel, bool normalizar)
     o->size = tamanho;
     if (normalizar)
         normalizar_objeto(o);
-    for (int i = 0; i < qtd_Pixel; i++)
-    {
-        info[i].obj_source = (void**)o;
-        info[i].source_type = 'o';
-    }
+
     return o;
 }
 
@@ -396,6 +365,7 @@ Objeto* criar_retangulo_monocromatico (Color cor, Vector2 tamanho)
     o->position = VETOR_NULO;
     o->renderizado = false;
     o->size = tamanho;
+    o->ref_node = NULL;
     Pixel* info = (Pixel*)malloc(area*sizeof(Pixel));
     for (int i = 0; i < area; i++)
     {
@@ -403,11 +373,7 @@ Objeto* criar_retangulo_monocromatico (Color cor, Vector2 tamanho)
         info[i].position = new_Vector2(i % tamanho.x, i / tamanho.x);
     }
     o->info = info;
-    for (int i = 0; i < area; i++)
-    {
-        info[i].obj_source = (void**)o;
-        info[i].source_type = 'o';
-    }
+
     return o;
 }
 
@@ -506,6 +472,7 @@ Screen* criar_tela (Vector2 tamanho, Color fundo, int limiar_de_cor)
     s->pixeis = (Pixel_Stack***)malloc(tamanho.y * sizeof(Pixel_Stack**));
     s->buffer = (Color**)malloc(tamanho.y * sizeof(Color*));
     s->limiar_de_cor = limiar_de_cor;
+    s->obj_list = criar_lista_objetos();
     for (int i = 0; i < tamanho.y; i++)
     {
         s->pixeis[i] = (Pixel_Stack**)malloc(tamanho.x * sizeof(Pixel_Stack*));
@@ -641,7 +608,9 @@ Pixel get_pixel_em(Screen* s, Vector2 pos)
     }
 }
 
-// INTERNA
+/**
+ * @internal
+ */
 AnimationManager* criar_anim_manager(int qtd_anims)
 {
     AnimationManager* anm = (AnimationManager*)malloc(sizeof(AnimationManager));
@@ -759,22 +728,25 @@ void desenhar_objeto(Screen* s, Objeto* obj)
 {
     if (obj->renderizado) return;
 
-    Vector2 center = centro_da_tela(s);
     char desenhou = 0;
 
     for (int i = 0; i < obj->qtd_Pixel; i++)
     {
         Vector2 abs_px = get_abs_Pixel_pos(obj, i);
-        Vector2 rel = vector_subtr(abs_px, s->position);
-        Vector2 pixel_pos = vector_sum(rel, center);
-        if (vetor_valido_na_tela(s, pixel_pos))
+        Vector2 pixel_pos;
+        if (vetor_aponta_para_area_visivel(s, abs_px, &pixel_pos))
         {
             desenhou = 1;
             add_Pixel(s->pixeis[pixel_pos.y][pixel_pos.x], obj->info[i]);
         }
     }
 
-    if (desenhou) obj->renderizado = true;
+    if (desenhou) 
+    {
+        obj->renderizado = true;
+        if (obj->ref_node == NULL)
+            incluir_na_lista(s->obj_list, (void*)obj, 'o');
+    }
 }
 
 void aplicar_filtro_obj(Objeto *obj, Color filtro)
@@ -831,25 +803,27 @@ void desenhar_objeto_complexo (Screen* s, ObjetoComplexo* obj)
     if (obj->renderizado) return;
     int frame = obj->frame_atual;
     
-    Vector2 center = centro_da_tela(s);
     char desenhou = '0';
     for (int i = 0; i < obj->frames[frame]->qtd_Pixel; i++)
     {
         Vector2 abs_px = get_complexo_abs_Pixel_pos(obj, frame, i);
-        Vector2 rel = vector_subtr(abs_px, s->position);
-        Vector2 pixel_pos = vector_sum(rel, center);
-        if (vetor_valido_na_tela(s, pixel_pos))
+        Vector2 pixel_pos;
+        if (vetor_aponta_para_area_visivel(s, abs_px, &pixel_pos))
         {
             desenhou = '1';
             add_Pixel(s->pixeis[pixel_pos.y][pixel_pos.x], obj->frames[frame]->info[i]);
         }
     }
 
-    if (desenhou == '1') obj->renderizado = true;
+    if (desenhou == '1') 
+    {
+        obj->renderizado = true;
+        if (obj->ref_node == NULL)
+            incluir_na_lista(s->obj_list, (void*)obj, 'c');
+    }
 }
 
-// INTERNA
-void excluir_anim_manager(AnimationManager* manager)
+static void excluir_anim_manager(AnimationManager* manager)
 {
     for (int i = 0; i < manager->qtd_anims; i++)
         free(manager->anims[i].frame_index);
@@ -876,39 +850,40 @@ void excluir_objeto_complexo(ObjetoComplexo* obj)
 void esconder_objeto(Screen* s, Objeto* obj)
 {
     if (!obj->renderizado) return;
-    Vector2 center = new_Vector2(
-        s->screen_size.x/2,
-        s->screen_size.y/2
-    );
+    
     for (int i = 0; i < obj->qtd_Pixel; i++)
     {
         Vector2 abs_px = get_abs_Pixel_pos(obj, i);
-        Vector2 rel = vector_subtr(abs_px, s->position);
-        Vector2 pixel_pos = vector_sum(rel, center);
-
-        if (vetor_valido_na_tela(s, pixel_pos))
+        Vector2 pixel_pos;
+        if (vetor_aponta_para_area_visivel(s, abs_px, &pixel_pos))
             deletar_Pixel(s, pixel_pos);
     }
     obj->renderizado = false;
+    if (obj->ref_node != NULL)
+    {
+        remover_da_lista(s->obj_list, obj->ref_node);
+        obj->ref_node = NULL;
+    }
 }
 
 void esconder_objeto_complexo (Screen* s, ObjetoComplexo* obj)
 {
     if (obj->renderizado == false) return;
-    Vector2 center = new_Vector2(
-        s->screen_size.x/2,
-        s->screen_size.y/2
-    );
+
     int frame = obj->frame_atual;
     for (int i = 0; i < obj->frames[obj->frame_atual]->qtd_Pixel; i++)
     {
         Vector2 abs_px = get_complexo_abs_Pixel_pos(obj, frame, i);
-        Vector2 rel = vector_subtr(abs_px, s->position);
-        Vector2 pixel_pos = vector_sum(rel, center);
-        if (vetor_valido_na_tela(s, pixel_pos))
+        Vector2 pixel_pos;
+        if (vetor_aponta_para_area_visivel(s, abs_px, &pixel_pos))
             deletar_Pixel(s, pixel_pos);
     }
     obj->renderizado = false;
+    if (obj->ref_node != NULL)
+    {
+        remover_da_lista(s->obj_list, obj->ref_node);
+        obj->ref_node = NULL;
+    }
 }
 
 void mover_objeto (Screen* s, Objeto* obj, Vector2 direction)
@@ -973,8 +948,6 @@ void rotacionar_objeto(Objeto *obj, Vector2 pivot, float graus)
         {
             grid[nova_pos.x][nova_pos.y] = true;
             Pixel novo_px = criar_Pixel(obj->info[i].cor, nova_pos);
-            novo_px.obj_source = (void**)obj;
-            novo_px.source_type = 'o';
             novos_pixeis[novo_count++] = novo_px;
         }
     }
@@ -1000,7 +973,6 @@ void render(Screen* s, bool reset)
     if (reset)
         moveCursor(VETOR_NULO);
     
-    char primeiroPrint = '1';
     Color cor_anterior = COR_NULA;
 
     for (int i = 0; i < s->screen_size.y; i++) 
@@ -1100,6 +1072,7 @@ ObjetoComplexo* criar_objeto_complexo_via_lista(Objeto** obj_origem, int qtd_obj
     obj->qtd_frames = qtd_objetos;
     obj->animar = true;
     obj->anim_manager = NULL;
+    obj->ref_node = NULL;
     for (int i = 0; i < qtd_objetos; i++)
     {
         obj_origem[i]->position = VETOR_NULO;
@@ -1117,11 +1090,6 @@ ObjetoComplexo* criar_objeto_complexo_via_lista(Objeto** obj_origem, int qtd_obj
             maior.y = obj->frames[i]->size.y;
     }
     obj->size = maior;
-    for (int i = 0; i < qtd_objetos; i++) for (int j = 0; j < obj->frames[i]->qtd_Pixel; j++)
-    {
-        obj->frames[i]->info[j].obj_source = (void**)obj;
-        obj->frames[i]->info[j].source_type = 'c';
-    }
     
     return obj;
 }

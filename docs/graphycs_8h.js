@@ -15,6 +15,7 @@ var graphycs_8h =
     [ "VETOR_DIREITA", "group___vector_constants.html#ga5196babe605fc33b8a25271cba5b1650", null ],
     [ "VETOR_ESQUERDA", "group___vector_constants.html#ga40e3c5fee7161f166daacab1063cf483", null ],
     [ "VETOR_NULO", "group___vector_constants.html#gae25164853722bd79a6cdf0a287b8d8d1", null ],
+    [ "ObjNode", "group___object_model.html#gaeafe80e30242f18b9b3eff5dd7bc0414", null ],
     [ "Pixel_Node", "group___pixel_model.html#ga69c96aaae3394504f2b97621e2a7ca65", null ],
     [ "alterar_pivot_frame", "group___pivot_operations.html#ga73b15518da626980d493b55053179eef", null ],
     [ "alterar_pivot_obj", "group___pivot_operations.html#ga9a914d740e30f5c036c570eaae7a7221", null ],

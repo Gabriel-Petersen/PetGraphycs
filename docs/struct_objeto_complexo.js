@@ -7,6 +7,7 @@ var struct_objeto_complexo =
     [ "pivot_frames", "struct_objeto_complexo.html#a2e7c7b6dda31db3a939af74f22d312a5", null ],
     [ "position", "struct_objeto_complexo.html#a568c4f7cea202cebb7430ebac674107a", null ],
     [ "qtd_frames", "struct_objeto_complexo.html#a440eeaa88904f349722855580d73ea89", null ],
+    [ "ref_node", "struct_objeto_complexo.html#abd6f019a46c0c7661611acfecb51e33e", null ],
     [ "renderizado", "struct_objeto_complexo.html#a1bb27014f6192c9e5f53ae388211f60e", null ],
     [ "size", "struct_objeto_complexo.html#aef1d073726fc4b857570fbae3230b8dd", null ]
 ];

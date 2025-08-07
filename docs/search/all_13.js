@@ -17,6 +17,5 @@ var searchData=
   ['smile_5fframe_5fwidth_14',['SMILE_FRAME_WIDTH',['../_smile_8h.html#aea626bb8a7da5a128f036a8a63941dc1',1,'Smile.h']]],
   ['sol_5fframe_5fheight_15',['SOL_FRAME_HEIGHT',['../piskel__data_8h.html#ae544fe3b9ee6fbfef12730f5e6545bd4',1,'piskel_data.h']]],
   ['sol_5fframe_5fwidth_16',['SOL_FRAME_WIDTH',['../piskel__data_8h.html#a32bfce83f3953f876fd33f1ea7b4d447',1,'piskel_data.h']]],
-  ['source_5ftype_17',['source_type',['../struct_pixel.html#ac1d0f1bbe117609a5b46d7a558ddea1f',1,'Pixel']]],
-  ['sprites_20do_20piskel_18',['Usando Sprites do Piskel',['../index.html#autotoc_md3',1,'']]]
+  ['sprites_20do_20piskel_17',['Usando Sprites do Piskel',['../index.html#autotoc_md3',1,'']]]
 ];

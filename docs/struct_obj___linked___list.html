@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PetGraphycs: Modelo de Objetos</title>
+<title>PetGraphycs: Referência à estrutura Obj_Linked_List</title>
 <link rel="icon" href="logo.jpg" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -65,7 +65,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('group___object_model.html','',''); });
+$(function(){initNavTree('struct_obj___linked___list.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -91,49 +91,57 @@ $(function(){initNavTree('group___object_model.html','',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">Modelo de Objetos </div></div>
+  <div class="headertitle"><div class="title">Referência à estrutura Obj_Linked_List<div class="ingroups"><a class="el" href="group___object_model.html">Modelo de Objetos</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Estruturas de objetos simples e complexos.  
-<a href="#details">Mais...</a></p>
+<p>Representa uma lista encadeada de objetos atrelada a uma tela.  
+ <a href="#details">Mais...</a></p>
+
+<p><code>#include &lt;<a class="el" href="graphycs_8h_source.html">graphycs.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Estruturas de Dados</h2></td></tr>
-<tr class="memitem:ObjNode" id="r_ObjNode"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_obj_node.html">ObjNode</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Representa um nodo de uma lista encadeada para os objetos de uma tela.  <a href="struct_obj_node.html#details">Mais...</a><br /></td></tr>
-<tr class="memitem:Obj_5FLinked_5FList" id="r_Obj_5FLinked_5FList"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_obj___linked___list.html">Obj_Linked_List</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Representa uma lista encadeada de objetos atrelada a uma tela.  <a href="struct_obj___linked___list.html#details">Mais...</a><br /></td></tr>
-<tr class="memitem:Objeto" id="r_Objeto"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_objeto.html">Objeto</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Representa um objeto gráfico estático (um único frame).  <a href="struct_objeto.html#details">Mais...</a><br /></td></tr>
-<tr class="memitem:ObjetoComplexo" id="r_ObjetoComplexo"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_objeto_complexo.html">ObjetoComplexo</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Representa um objeto com múltiplos frames e animações (ex: personagens de jogos).  <a href="struct_objeto_complexo.html#details">Mais...</a><br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
-Definições de tipos</h2></td></tr>
-<tr class="memitem:gaeafe80e30242f18b9b3eff5dd7bc0414" id="r_gaeafe80e30242f18b9b3eff5dd7bc0414"><td class="memItemLeft" align="right" valign="top">typedef struct ObjNode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gaeafe80e30242f18b9b3eff5dd7bc0414">ObjNode</a></td></tr>
-<tr class="memdesc:gaeafe80e30242f18b9b3eff5dd7bc0414"><td class="mdescLeft">&#160;</td><td class="mdescRight">Representa um nodo de uma lista encadeada para os objetos de uma tela.  <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Campos de Dados</h2></td></tr>
+<tr class="memitem:ab64e355d6f14927f41266ddfbf88ac91" id="r_ab64e355d6f14927f41266ddfbf88ac91"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab64e355d6f14927f41266ddfbf88ac91">qtd</a></td></tr>
+<tr class="memitem:a03c0c54a269c1e185dae080035644ca9" id="r_a03c0c54a269c1e185dae080035644ca9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_obj_node.html">ObjNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a03c0c54a269c1e185dae080035644ca9">inicio</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descrição detalhada</h2>
-<p>Estruturas de objetos simples e complexos. </p>
-<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Documentação dos tipos</h2>
-<a id="gaeafe80e30242f18b9b3eff5dd7bc0414" name="gaeafe80e30242f18b9b3eff5dd7bc0414"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaeafe80e30242f18b9b3eff5dd7bc0414">&#9670;&#160;</a></span>ObjNode</h2>
+<div class="textblock"><p>Representa uma lista encadeada de objetos atrelada a uma tela. </p>
+<p>Cada tela possui uma lista dessas que guarda todos os objetos que não estão escondidos na WorldPos. </p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Documentação dos campos e atributos</h2>
+<a id="a03c0c54a269c1e185dae080035644ca9" name="a03c0c54a269c1e185dae080035644ca9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03c0c54a269c1e185dae080035644ca9">&#9670;&#160;</a></span>inicio</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef struct ObjNode ObjNode</td>
+          <td class="memname"><a class="el" href="struct_obj_node.html">ObjNode</a>* inicio</td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Representa um nodo de uma lista encadeada para os objetos de uma tela. </p>
-<p>Cada nodo armazena a referência a qualquer um dos tipos de objeto - atualizada internamente </p>
+<p>Ponteiro para o início da lista </p>
 
 </div>
 </div>
+<a id="ab64e355d6f14927f41266ddfbf88ac91" name="ab64e355d6f14927f41266ddfbf88ac91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab64e355d6f14927f41266ddfbf88ac91">&#9670;&#160;</a></span>qtd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int qtd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Quantidade de objetos armazenados na lista </p>
+
+</div>
+</div>
+<hr/>A documentação para esta estrutura foi gerada a partir do seguinte ficheiro:<ul>
+<li>include/<a class="el" href="graphycs_8h_source.html">graphycs.h</a></li>
+</ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
@@ -147,6 +155,7 @@ Definições de tipos</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a href="struct_obj___linked___list.html">Obj_Linked_List</a></li>
     <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
   </ul>
 </div>
