@@ -25,13 +25,18 @@ int main ()
     // 3. Edição da cor do texto
     trocar_cor_texto(ola_mundo, COLOR_VERMELHO); // Passe aqui a cor que o texto deve ter - preto por padrão
     // A alteração de cor deve ser feita antes de desenhar
-    mover_objeto(tela, ola_mundo, produto_vetor_escalar(VETOR_CIMA, 4));
+    mover_objeto(tela, ola_mundo, produto_vetor_escalar(VETOR_CIMA, 6));
 
 
     // Criando um objeto de texto um pouco menor
     Objeto* graficos_txt = criar_objeto_de_texto("Graficos!", 3, 2);
     centralizar_objeto(graficos_txt);
-    mover_objeto(tela, graficos_txt, produto_vetor_escalar(VETOR_BAIXO, 4));
+    mover_objeto(tela, graficos_txt, produto_vetor_escalar(VETOR_BAIXO, 2));
+
+    Objeto* jogos_txt = criar_objeto_de_texto("Jogos?", 1, 1);
+    centralizar_objeto(jogos_txt);
+    trocar_cor_texto(jogos_txt, COLOR_VERDE);
+    mover_objeto(tela, jogos_txt, produto_vetor_escalar(VETOR_BAIXO, 10));
 
     // 4. Renderização
     render(tela, true);

@@ -412,7 +412,7 @@ Objeto* criar_obj_eixos_debug(Screen* s)
             info[idx++] = criar_Pixel(COLOR_BRANCO, new_Vector2(0, dy));
     
     if (idx != total) {
-        fprintf(stderr, "Debug-axes: esperado %d pixels mas gerou %d\n",
+        fprintf(stderr, "Debug: esperado %d pixels mas gerou %d\n",
                 total, idx);
         exit(1);
     }
@@ -1143,7 +1143,7 @@ static Pixel* pixel_info_do_caractere (char c, Vector2 offset, int* out_qtd_pixe
         );
     else
     {
-        fprintf(stderr, "Tentou criar fonte com tamanho invalido. A fonte so pode ter tamanho 1, 2 ou 3");
+        fprintf(stderr, "3 - Tentou criar fonte com tamanho invalido = %d. A fonte so pode ter tamanho 1, 2 ou 3", tam_fonte);
         return NULL;
     }
 }
@@ -1158,11 +1158,11 @@ Objeto* criar_objeto_de_texto (char* texto, int espacamento, int tam_fonte)
 {
     if (tam_fonte < 1 || tam_fonte > 3)
     {
-        fprintf(stderr, "Tentou criar fonte com tamanho invalido. A fonte so pode ter tamanho 1, 2 ou 3");
+        fprintf(stderr, "1 - Tentou criar fonte com tamanho invalido = %d. A fonte so pode ter tamanho 1, 2 ou 3", tam_fonte);
         return NULL;
     }
 
-    int h, w;
+    int w;
     switch (tam_fonte)
     {
     case 1:
@@ -1170,10 +1170,12 @@ Objeto* criar_objeto_de_texto (char* texto, int espacamento, int tam_fonte)
         break;
     case 2:
         w = TXT_2_CHAR_WIDTH;
+        break;
     case 3:
         w = TXT_3_CHAR_WIDTH;
+        break;
     default:
-        fprintf(stderr, "Tentou criar fonte com tamanho invalido. A fonte so pode ter tamanho 1, 2 ou 3");
+        fprintf(stderr, "2 - Tentou criar fonte com tamanho invalido = %d. A fonte so pode ter tamanho 1, 2 ou 3", tam_fonte);
         return NULL;
         break;
     }
