@@ -94,16 +94,8 @@ $(function(){initNavTree('graphycs_8c.html','',''); });
   <div class="headertitle"><div class="title">Referência ao ficheiro graphycs.c</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;stdbool.h&gt;</code><br />
-<code>#include &lt;stdint.h&gt;</code><br />
-<code>#include &lt;conio.h&gt;</code><br />
-<code>#include &lt;ctype.h&gt;</code><br />
-<code>#include &lt;limits.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="graphycs_8h_source.html">graphycs.h</a>&gt;</code><br />
 <code>#include &lt;math.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="graphycs_8h_source.html">graphycs.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
@@ -237,13 +229,17 @@ Funções</h2></td></tr>
 <tr class="memdesc:gaec4dc4a926c26cdfe7ffdbbb1d40b606"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renderiza o conteúdo da tela no console.  <br /></td></tr>
 <tr class="memitem:gaf7e90a36f80516d0ee0ae321970ed0c6" id="r_gaf7e90a36f80516d0ee0ae321970ed0c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___filter_mirror_rotation.html#gaf7e90a36f80516d0ee0ae321970ed0c6">aplicar_filtro_obj_complexo</a> (<a class="el" href="struct_objeto_complexo.html">ObjetoComplexo</a> *obj, <a class="el" href="struct_color.html">Color</a> filtro)</td></tr>
 <tr class="memdesc:gaf7e90a36f80516d0ee0ae321970ed0c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aplica um filtro de cor ao objeto complexo.  <br /></td></tr>
-<tr class="memitem:a42c1a3f0b0e7878203aae2ebd6d20fb9" id="r_a42c1a3f0b0e7878203aae2ebd6d20fb9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_pixel.html">Pixel</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a42c1a3f0b0e7878203aae2ebd6d20fb9">converter_piskel_frame_para_Pixel_info</a> (const uint32_t frame_data[], int width, int height, int *qtd_Pixel)</td></tr>
+<tr class="memitem:a3c0ea9f25639f744e60a62b4342f4087" id="r_a3c0ea9f25639f744e60a62b4342f4087"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_pixel.html">Pixel</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c0ea9f25639f744e60a62b4342f4087">converter_piskel_frame_para_Pixel_info</a> (const uint32_t frame_data[], int width, int height, int *qtd_Pixel, <a class="el" href="struct_vector2.html">Vector2</a> offset)</td></tr>
 <tr class="memitem:gad1bf0d3ec70950817cda7f61de7e7d38" id="r_gad1bf0d3ec70950817cda7f61de7e7d38"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_objeto.html">Objeto</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___simple_object_operations.html#gad1bf0d3ec70950817cda7f61de7e7d38">criar_piskel_obj</a> (const uint32_t frame_data[], int width, int height)</td></tr>
 <tr class="memdesc:gad1bf0d3ec70950817cda7f61de7e7d38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cria um objeto a partir de dados de um frame do Piskel.  <br /></td></tr>
 <tr class="memitem:gaba021a9d04342cfba94d1cff4ae48f92" id="r_gaba021a9d04342cfba94d1cff4ae48f92"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_objeto_complexo.html">ObjetoComplexo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___complex_object_creation.html#gaba021a9d04342cfba94d1cff4ae48f92">criar_objeto_complexo_piskel</a> (int qtd_frames, int width, int height, const uint32_t obj_data[qtd_frames][width *height])</td></tr>
 <tr class="memdesc:gaba021a9d04342cfba94d1cff4ae48f92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cria um objeto complexo a partir de matriz do Piskel.  <br /></td></tr>
 <tr class="memitem:gaea223222ef556eee1a3400542592b9ff" id="r_gaea223222ef556eee1a3400542592b9ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_objeto_complexo.html">ObjetoComplexo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___complex_object_creation.html#gaea223222ef556eee1a3400542592b9ff">criar_objeto_complexo_via_lista</a> (<a class="el" href="struct_objeto.html">Objeto</a> **obj_origem, int qtd_objetos)</td></tr>
 <tr class="memdesc:gaea223222ef556eee1a3400542592b9ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cria um objeto complexo a partir de lista de objetos (frames).  <br /></td></tr>
+<tr class="memitem:ga81208103180348df8156e2d813b8f9aa" id="r_ga81208103180348df8156e2d813b8f9aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___texts.html#ga81208103180348df8156e2d813b8f9aa">trocar_cor_texto</a> (<a class="el" href="struct_objeto.html">Objeto</a> *txt_obj, <a class="el" href="struct_color.html">Color</a> nova_cor)</td></tr>
+<tr class="memdesc:ga81208103180348df8156e2d813b8f9aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Troca a cor de um texto inteiro (Preto por default)  <br /></td></tr>
+<tr class="memitem:gaae134bfa371ee0ef974671da2ef37c86" id="r_gaae134bfa371ee0ef974671da2ef37c86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_objeto.html">Objeto</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___texts.html#gaae134bfa371ee0ef974671da2ef37c86">criar_objeto_de_texto</a> (char *texto, int espacamento, int tam_fonte)</td></tr>
+<tr class="memdesc:gaae134bfa371ee0ef974671da2ef37c86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cria um objeto de texto a partir de um texto.  <br /></td></tr>
 </table>
 <a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Documentação das macros</h2>
 <a id="a525335710b53cb064ca56b936120431e" name="a525335710b53cb064ca56b936120431e"></a>
@@ -305,8 +301,8 @@ Funções</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentação das funções</h2>
-<a id="a42c1a3f0b0e7878203aae2ebd6d20fb9" name="a42c1a3f0b0e7878203aae2ebd6d20fb9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42c1a3f0b0e7878203aae2ebd6d20fb9">&#9670;&#160;</a></span>converter_piskel_frame_para_Pixel_info()</h2>
+<a id="a3c0ea9f25639f744e60a62b4342f4087" name="a3c0ea9f25639f744e60a62b4342f4087"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c0ea9f25639f744e60a62b4342f4087">&#9670;&#160;</a></span>converter_piskel_frame_para_Pixel_info()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -329,7 +325,12 @@ Funções</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>qtd_Pixel</em></span>&#160;)</td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>qtd_Pixel</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_vector2.html">Vector2</a></td>          <td class="paramname"><span class="paramname"><em>offset</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">

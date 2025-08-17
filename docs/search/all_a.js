@@ -7,5 +7,6 @@ var searchData=
   ['get_5fpixel_5fem_4',['get_pixel_em',['../group___query_functions.html#gaed0766002ddaa4d7b8b9670fbc626e21',1,'get_pixel_em(Screen *s, Vector2 pos):&#160;graphycs.c'],['../group___query_functions.html#gaed0766002ddaa4d7b8b9670fbc626e21',1,'get_pixel_em(Screen *s, Vector2 pos):&#160;graphycs.c']]],
   ['gráfica_20para_20terminal_5',['PetGraphycs - Biblioteca Gráfica para Terminal',['../index.html',1,'']]],
   ['graphycs_2ec_6',['graphycs.c',['../graphycs_8c.html',1,'']]],
-  ['graphycs_2eh_7',['graphycs.h',['../graphycs_8h.html',1,'']]]
+  ['graphycs_2eh_7',['graphycs.h',['../graphycs_8h.html',1,'']]],
+  ['graphycstxt_2eh_8',['graphycsTxt.h',['../graphycs_txt_8h.html',1,'']]]
 ];

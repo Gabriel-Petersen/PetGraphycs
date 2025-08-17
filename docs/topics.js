@@ -21,5 +21,6 @@ var topics =
     [ "Operações de Pivô", "group___pivot_operations.html", "group___pivot_operations" ],
     [ "Desenho e Ocultação", "group___rendering_render.html", "group___rendering_render" ],
     [ "Ciclo de Vida de Objetos", "group___lifecycle.html", "group___lifecycle" ],
-    [ "Movimentação e Teletransporte", "group___transformations.html", "group___transformations" ]
+    [ "Movimentação e Teletransporte", "group___transformations.html", "group___transformations" ],
+    [ "Renderização de textos", "group___texts.html", "group___texts" ]
 ];

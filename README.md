@@ -18,6 +18,7 @@ MinhaLib/
     ├── 01_basico.c      // Exemplo: renderização estática
     ├── 02_piskel.c      // Exemplo: uso de sprites do Piskel
     └── 03_animacao.c    // Exemplo: animações com spritesheets
+    └── 04_textos.c      // Exemplo: criação de textos para telas
 \endcode
 
 ### 2. Compilação Básica
@@ -62,6 +63,7 @@ Objeto* sprite = criar_piskel_obj(sprite_data, SPRITE_WIDTH, SPRITE_HEIGHT);
 | `01_basico.c`   | Renderização estática de objetos   | `gcc -Iinclude examples/01_basico.c src/graphycs.c -o examples/basico`     |
 | `02_piskel.c`   | Carregamento de sprites do Piskel  | `gcc -Iinclude examples/02_piskel.c src/graphycs.c -o examples/piskel`     |
 | `03_animacao.c` | Spritesheets e ObjetoComplexo      | `gcc -Iinclude examples/03_animacao.c src/graphycs.c -o examples/animacao` |
+| `04_textos.c`   | Criação de textos de tela          | `gcc -Iinclude examples/04_textos.c src/graphycs.c -o examples/textos`     |
 
 Execute com:
 
@@ -69,6 +71,7 @@ Execute com:
 ./examples/basico.exe
 ./examples/piskel.exe
 ./examples/animacao.exe
+./examples/textos.exe
 \endcode
 
 ## Documentação

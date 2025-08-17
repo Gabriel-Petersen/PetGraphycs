@@ -8,8 +8,9 @@ var searchData=
   ['de_20pixel_5',['Modelo de Pixel',['../group___pixel_model.html',1,'']]],
   ['de_20pixels_6',['Posição de Pixels',['../group___pixel_position.html',1,'']]],
   ['de_20tela_7',['Operações de Tela',['../group___screen_operations.html',1,'']]],
-  ['de_20vetores_8',['Constantes de Vetores',['../group___vector_constants.html',1,'']]],
-  ['de_20vida_20de_20objetos_9',['Ciclo de Vida de Objetos',['../group___lifecycle.html',1,'']]],
-  ['desenho_20e_20ocultação_10',['Desenho e Ocultação',['../group___rendering_render.html',1,'']]],
-  ['diretas_20com_20pixels_11',['Operações Diretas com Pixels',['../group___pixel_operations.html',1,'']]]
+  ['de_20textos_8',['Renderização de textos',['../group___texts.html',1,'']]],
+  ['de_20vetores_9',['Constantes de Vetores',['../group___vector_constants.html',1,'']]],
+  ['de_20vida_20de_20objetos_10',['Ciclo de Vida de Objetos',['../group___lifecycle.html',1,'']]],
+  ['desenho_20e_20ocultação_11',['Desenho e Ocultação',['../group___rendering_render.html',1,'']]],
+  ['diretas_20com_20pixels_12',['Operações Diretas com Pixels',['../group___pixel_operations.html',1,'']]]
 ];

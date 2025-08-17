@@ -1,14 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
-#include <stdint.h>
-#include <conio.h>
-#include <ctype.h>
-#include <limits.h>
+#include <graphycs.h>
 #define _USE_MATH_DEFINES
 #include <math.h>
-#include "graphycs.h"
 
 static Obj_Linked_List* criar_lista_objetos ()
 {
@@ -1016,7 +1008,7 @@ void aplicar_filtro_obj_complexo (ObjetoComplexo* obj, Color filtro)
 }
 
 //INTERNA
-Pixel* converter_piskel_frame_para_Pixel_info(const uint32_t frame_data[], int width, int height, int* qtd_Pixel) 
+Pixel* converter_piskel_frame_para_Pixel_info(const uint32_t frame_data[], int width, int height, int* qtd_Pixel, Vector2 offset) 
 {
     int total_Pixels = width * height;
     int pixeis_coloridos = 0;
@@ -1040,7 +1032,7 @@ Pixel* converter_piskel_frame_para_Pixel_info(const uint32_t frame_data[], int w
         int x = i % width;
         int y = i / width;
         Color cor = converter_ABGR_para_Color(frame_data[i]);
-        info[idx++] = criar_Pixel(cor, new_Vector2(x, y));
+        info[idx++] = criar_Pixel(cor, vector_sum(offset, new_Vector2(x, y)));
     }
     
     *qtd_Pixel = pixeis_coloridos;
@@ -1050,7 +1042,7 @@ Pixel* converter_piskel_frame_para_Pixel_info(const uint32_t frame_data[], int w
 Objeto* criar_piskel_obj(const uint32_t frame_data[], int width, int height)
 {
     int size;
-    Pixel* info = converter_piskel_frame_para_Pixel_info(frame_data, width, height, &size);
+    Pixel* info = converter_piskel_frame_para_Pixel_info(frame_data, width, height, &size, VETOR_NULO);
     return criar_objeto_custom(info, size, true);
 }
 
@@ -1092,4 +1084,129 @@ ObjetoComplexo* criar_objeto_complexo_via_lista(Objeto** obj_origem, int qtd_obj
     obj->size = maior;
     
     return obj;
+}
+
+static int get_char_index(char c)
+{
+    c = toupper(c);
+
+    if (c >= 'A' && c <= 'Z')
+        return c - 'A';
+
+    if (c >= '0' && c <= '9')
+        return 26 + (c - '0');
+
+    switch (c) 
+    {
+        case '.': return 36;
+        case ',': return 37;
+        case '!': return 38;
+        case '?': return 39;
+        default: return -10;
+    }
+}
+
+static Pixel* pixel_info_do_caractere (char c, Vector2 offset, int* out_qtd_pixel, int tam_fonte)
+{
+    int char_index = c == '\0' || c == ' ' ? -1 : get_char_index(c);
+    if (char_index < 0)
+    {
+        if (char_index == -10)
+            printf("ERRO! Caractere não suportado inserido\n");
+        *out_qtd_pixel = 0;
+        return NULL;
+    }
+    
+    if (tam_fonte == 1)
+        return converter_piskel_frame_para_Pixel_info(
+            txt_font_data_1[char_index], 
+            TXT_1_CHAR_WIDTH, 
+            TXT_1_CHAR_HEIGHT, 
+            out_qtd_pixel, 
+            offset
+        );
+    else if (tam_fonte == 2)
+        return converter_piskel_frame_para_Pixel_info(
+            txt_font_data_2[char_index], 
+            TXT_2_CHAR_WIDTH, 
+            TXT_2_CHAR_HEIGHT, 
+            out_qtd_pixel, 
+            offset
+        );
+    else if (tam_fonte == 3)
+        return converter_piskel_frame_para_Pixel_info(
+            txt_font_data_3[char_index], 
+            TXT_3_CHAR_WIDTH, 
+            TXT_3_CHAR_HEIGHT, 
+            out_qtd_pixel, 
+            offset
+        );
+    else
+    {
+        fprintf(stderr, "Tentou criar fonte com tamanho invalido. A fonte so pode ter tamanho 1, 2 ou 3");
+        return NULL;
+    }
+}
+
+void trocar_cor_texto (Objeto* txt_obj, Color nova_cor)
+{
+    for (int i = 0; i < txt_obj->qtd_Pixel; i++)
+        txt_obj->info[i].cor = nova_cor;
+}
+
+Objeto* criar_objeto_de_texto (char* texto, int espacamento, int tam_fonte)
+{
+    if (tam_fonte < 1 || tam_fonte > 3)
+    {
+        fprintf(stderr, "Tentou criar fonte com tamanho invalido. A fonte so pode ter tamanho 1, 2 ou 3");
+        return NULL;
+    }
+
+    int h, w;
+    switch (tam_fonte)
+    {
+    case 1:
+        w = TXT_1_CHAR_WIDTH;
+        break;
+    case 2:
+        w = TXT_2_CHAR_WIDTH;
+    case 3:
+        w = TXT_3_CHAR_WIDTH;
+    default:
+        fprintf(stderr, "Tentou criar fonte com tamanho invalido. A fonte so pode ter tamanho 1, 2 ou 3");
+        return NULL;
+        break;
+    }
+
+    int txt_size = strlen(texto);
+    Pixel** totais = (Pixel**)malloc(txt_size * sizeof(Pixel*));
+    int total_pixel = 0;
+    int qtd_parcial[txt_size];
+    Vector2 offset_atual = VETOR_NULO;
+    for (int i = 0; i < txt_size; i++)
+    {
+        totais[i] = pixel_info_do_caractere(texto[i], offset_atual, &qtd_parcial[i], tam_fonte);
+        if (qtd_parcial[i] == 0)
+            offset_atual.x += (w + espacamento) / 2;
+        else
+            offset_atual.x += w + espacamento;
+        total_pixel += qtd_parcial[i];
+    }
+    Pixel* info = (Pixel*)malloc(total_pixel * sizeof(Pixel));
+    int i = -1;
+    for (int j = 0; j < txt_size; j++)
+    {
+        if (totais[j] != NULL)
+        {
+            for (int k = 0; k < qtd_parcial[j]; k++)
+            {
+                info[++i] = totais[j][k];
+            }
+        }
+    }
+    for (int j = 0; j < txt_size; j++) if (totais[j] != NULL)
+        free(totais[j]);
+    
+    free(totais);
+    return criar_objeto_custom(info, total_pixel, true);
 }

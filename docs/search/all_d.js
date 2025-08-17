@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['main_0',['main',['../01__basico_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;01_basico.c'],['../02__piskel_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;02_piskel.c'],['../03__animacao_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;03_animacao.c']]],
+  ['main_0',['main',['../01__basico_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;01_basico.c'],['../02__piskel_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;02_piskel.c'],['../03__animacao_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;03_animacao.c'],['../04__textos_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;04_textos.c']]],
   ['max_1',['max',['../graphycs_8c.html#affe776513b24d84b39af8ab0930fef7f',1,'graphycs.c']]],
   ['merge_5fobjeto_2',['merge_objeto',['../group___simple_object_operations.html#ga8fa6d9f95354c919a46ddd66d3506484',1,'merge_objeto(Objeto *prioridade, Objeto *novo, Vector2 pivot):&#160;graphycs.c'],['../group___simple_object_operations.html#ga8fa6d9f95354c919a46ddd66d3506484',1,'merge_objeto(Objeto *prioridade, Objeto *novo, Vector2 pivot):&#160;graphycs.c']]],
   ['min_3',['min',['../graphycs_8c.html#ac6afabdc09a49a433ee19d8a9486056d',1,'graphycs.c']]],

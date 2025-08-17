@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PetGraphycs: Renderização de textos</title>
+<link rel="icon" href="logo.jpg" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.avif"/></td>
+  <td id="projectalign">
+   <div id="projectname">PetGraphycs<span id="projectnumber">&#160;beta1.8</span>
+   </div>
+   <div id="projectbrief">Uma simples biblioteca gráfica de terminal em C</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Localizar',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group___texts.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrada</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Renderização de textos </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Funções para criar e editar textos.  
+<a href="#details">Mais...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funções</h2></td></tr>
+<tr class="memitem:gaae134bfa371ee0ef974671da2ef37c86" id="r_gaae134bfa371ee0ef974671da2ef37c86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_objeto.html">Objeto</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gaae134bfa371ee0ef974671da2ef37c86">criar_objeto_de_texto</a> (char *texto, int espacamento, int tam_fonte)</td></tr>
+<tr class="memdesc:gaae134bfa371ee0ef974671da2ef37c86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cria um objeto de texto a partir de um texto.  <br /></td></tr>
+<tr class="memitem:ga81208103180348df8156e2d813b8f9aa" id="r_ga81208103180348df8156e2d813b8f9aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga81208103180348df8156e2d813b8f9aa">trocar_cor_texto</a> (<a class="el" href="struct_objeto.html">Objeto</a> *txt_obj, <a class="el" href="struct_color.html">Color</a> nova_cor)</td></tr>
+<tr class="memdesc:ga81208103180348df8156e2d813b8f9aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Troca a cor de um texto inteiro (Preto por default)  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descrição detalhada</h2>
+<p>Funções para criar e editar textos. </p>
+<dl class="section note"><dt>Nota</dt><dd>Textos são <a class="el" href="struct_objeto.html" title="Representa um objeto gráfico estático (um único frame).">Objeto</a>'s, logo as funções de mover, rotacionar, fundir, etc. ainda funcionam. </dd></dl>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentação das funções</h2>
+<a id="gaae134bfa371ee0ef974671da2ef37c86" name="gaae134bfa371ee0ef974671da2ef37c86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaae134bfa371ee0ef974671da2ef37c86">&#9670;&#160;</a></span>criar_objeto_de_texto()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_objeto.html">Objeto</a> * criar_objeto_de_texto </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>texto</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>espacamento</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>tam_fonte</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Cria um objeto de texto a partir de um texto. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">espacamento</td><td>Distância (em pixel) entre cada caractere </td></tr>
+    <tr><td class="paramname">tam_fonte</td><td>O tamanho da fonte, podendo ser 1, 2 ou 3. Quanto maior a fonte, maior a resolução. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Nota</dt><dd>Apenas 40 caracteres são suportados. Letras de A - Z; Algarismos de 0 - 9; e os caracteres especiais: Ponto - . Vírgula - , Exclamação ! Interrogação ? </dd></dl>
+
+</div>
+</div>
+<a id="ga81208103180348df8156e2d813b8f9aa" name="ga81208103180348df8156e2d813b8f9aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga81208103180348df8156e2d813b8f9aa">&#9670;&#160;</a></span>trocar_cor_texto()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void trocar_cor_texto </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_objeto.html">Objeto</a> *</td>          <td class="paramname"><span class="paramname"><em>txt_obj</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_color.html">Color</a></td>          <td class="paramname"><span class="paramname"><em>nova_cor</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Troca a cor de um texto inteiro (Preto por default) </p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

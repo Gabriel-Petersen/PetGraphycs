@@ -1,6 +1,7 @@
 #ifndef GRAPHYCS_H
 #define GRAPHYCS_H
 
+#include <graphycsTxt.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -744,6 +745,28 @@ void mover_objeto(Screen* s, Objeto* obj, Vector2 direction);
  * @param direction Deslocamento relativo a aplicar.
  */
 void mover_objeto_complexo(Screen* s, ObjetoComplexo* obj, Vector2 direction);
+/** @} */
+
+/** @defgroup Texts Renderização de textos
+ *  @brief Funções para criar e editar textos
+ *  @note Textos são Objeto's, logo as funções de mover, rotacionar, fundir, etc. ainda funcionam.
+ *  @{
+ */
+/**
+ * @brief Cria um objeto de texto a partir de um texto
+ * @param espacamento Distância (em pixel) entre cada caractere
+ * @param tam_fonte O tamanho da fonte, podendo ser 1, 2 ou 3. Quanto maior a fonte, maior a resolução. 
+ * @note Apenas 40 caracteres são suportados. 
+ * Letras de A - Z;
+ * Algarismos de 0 - 9; e os caracteres especiais:
+ * Ponto - .
+ * Vírgula - ,
+ * Exclamação !
+ * Interrogação ?
+ */
+Objeto* criar_objeto_de_texto (char* texto, int espacamento, int tam_fonte);
+/** @brief Troca a cor de um texto inteiro (Preto por default) */
+void trocar_cor_texto (Objeto* txt_obj, Color nova_cor);
 /** @} */
 
 #endif // GRAPHYCS_H
