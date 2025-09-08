@@ -1,7 +1,7 @@
 #ifndef GRAPHYCS_H
 #define GRAPHYCS_H
 
-#include <graphycsTxt.h>
+#include "graphycsTxt.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

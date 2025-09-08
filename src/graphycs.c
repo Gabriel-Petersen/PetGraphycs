@@ -1,4 +1,4 @@
-#include <graphycs.h>
+#include "../include/graphycs.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
 #define COR_NULA (Color){-10, -10, -10}
@@ -55,8 +55,6 @@ static void incluir_na_lista (Obj_Linked_List* obj_list, void* obj_ptr, char obj
     obj_list->inicio = novo_nodo;
     obj_list->qtd++;
 }
-
-#include "graphycs.h"
 
 #ifndef IN_LINUX_SO
 // ================= WINDOWS =================
@@ -1096,7 +1094,7 @@ void rotacionar_objeto_complexo (Screen* s, ObjetoComplexo* obj, Vector2 pivot, 
     char redraw = false;
     if (s != NULL) esconder_objeto_complexo(s, obj);
     for (int i = 0; i < obj->qtd_frames; i++)
-        redraw = (NULL, obj->frames[i], pivot, graus);
+        redraw = rotacionar_objeto(NULL, obj->frames[i], pivot, graus);
     if (redraw == true) desenhar_objeto_complexo(s, obj);
 }
 
