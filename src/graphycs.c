@@ -1,6 +1,7 @@
 #include <graphycs.h>
 #define _USE_MATH_DEFINES
 #include <math.h>
+#define COR_NULA (Color){-10, -10, -10}
 
 static Obj_Linked_List* criar_lista_objetos ()
 {
@@ -55,14 +56,52 @@ static void incluir_na_lista (Obj_Linked_List* obj_list, void* obj_ptr, char obj
     obj_list->qtd++;
 }
 
-char ler_teclado()
-{
+#include "graphycs.h"
+
+#ifndef IN_LINUX_SO
+// ================= WINDOWS =================
+char ler_teclado(void) {
     char ultima = '\0';
     while (_kbhit())
         ultima = toupper(getch());
-
     return ultima;
 }
+
+#else
+// ================= LINUX =================
+static int kbhit(void) {
+    struct termios oldt, newt;
+    int ch;
+    int oldf;
+
+    tcgetattr(STDIN_FILENO, &oldt);
+    newt = oldt;
+    newt.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+    oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
+    fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
+
+    ch = getchar();
+
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+    fcntl(STDIN_FILENO, F_SETFL, oldf);
+
+    if (ch != EOF) {
+        ungetc(ch, stdin);
+        return 1;
+    }
+    return 0;
+}
+
+char ler_teclado(void) {
+    char ultima = '\0';
+    while (kbhit()) {
+        ultima = getchar();
+        ultima = toupper(ultima);
+    }
+    return ultima;
+}
+#endif
 
 void print_vector(Vector2 v, char* name)
 {
@@ -149,7 +188,7 @@ Vector2 centro_objeto_complexo(ObjetoComplexo* obj)
     return produto_vetor_escalar(obj->size, 0.5f);
 }
 
-Vector2 get_complexo_abs_Pixel_pos(ObjetoComplexo* obj, int frame, int index)
+Vector2 get_complexo_abs_pixel_pos(ObjetoComplexo* obj, int frame, int index)
 {
     return new_Vector2(
         obj->frames[frame]->info[index].position.x + obj->position.x,
@@ -169,7 +208,7 @@ static Vector2 aplicar_matriz_rot (Vector2 Pixel_pos, Vector2 rot_pivo, float gr
     return new_Vector2(round(x_rotacionado + rot_pivo.x), round(-y_rotacionado + rot_pivo.y));
 }
 
-Pixel criar_Pixel (Color cor, Vector2 pos)
+Pixel criar_pixel (Color cor, Vector2 pos)
 {
     Pixel p;
     p.cor = cor;
@@ -196,7 +235,7 @@ static Pixel_Node* criar_nodo (Pixel p)
     return n;
 }
 
-static void add_Pixel (Pixel_Stack* stack, Pixel p)
+static void add_pixel (Pixel_Stack* stack, Pixel p)
 {
     Pixel_Node* x = criar_nodo(p);
     x->anterior = stack->topo;
@@ -210,7 +249,7 @@ void mover_tela (Screen* s, Vector2 direction)
         Pixel_Stack* stack = s->pixeis[i][j];
         while (stack->topo->anterior != NULL)
         {
-            desempilhar_Pixel(stack);
+            desempilhar_pixel(stack);
         }
     }
 
@@ -242,7 +281,7 @@ void mover_tela (Screen* s, Vector2 direction)
     }
 }
 
-Vector2 get_abs_Pixel_pos (Objeto* obj, int index)
+Vector2 get_abs_pixel_pos (Objeto* obj, int index)
 {
     return vector_sum(obj->info[index].position, obj->position);
 }
@@ -260,10 +299,10 @@ Vector2 centro_da_tela(Screen* s)
     );
 }
 
-Pixel desempilhar_Pixel (Pixel_Stack* stack)
+Pixel desempilhar_pixel (Pixel_Stack* stack)
 {
     Pixel_Node* x = stack->topo;
-    Pixel noPixel = criar_Pixel(COLOR_PRETO, VETOR_NULO);
+    Pixel noPixel = criar_pixel(COLOR_PRETO, VETOR_NULO);
     if (x == NULL) return noPixel;
     stack->topo = stack->topo->anterior;
     noPixel = x->pixel;
@@ -273,19 +312,19 @@ Pixel desempilhar_Pixel (Pixel_Stack* stack)
 
 void normalizar_objeto(Objeto* obj) 
 {
-    if (obj->qtd_Pixel <= 0)
+    if (obj->qtd_pixel <= 0)
         return;
     
     int min_x = obj->info[0].position.x;
     int min_y = obj->info[0].position.y;
     
-    for (int i = 1; i < obj->qtd_Pixel; i++) 
+    for (int i = 1; i < obj->qtd_pixel; i++) 
     {
         if (obj->info[i].position.x < min_x) min_x = obj->info[i].position.x;
         if (obj->info[i].position.y < min_y) min_y = obj->info[i].position.y;
     }
     
-    for (int i = 0; i < obj->qtd_Pixel; i++) 
+    for (int i = 0; i < obj->qtd_pixel; i++) 
     {
         obj->info[i].position.x -= min_x;
         obj->info[i].position.y -= min_y;
@@ -294,13 +333,13 @@ void normalizar_objeto(Objeto* obj)
 
 void centralizar_objeto(Objeto* obj)
 {
-    if (obj->qtd_Pixel <= 0)
+    if (obj->qtd_pixel <= 0)
         return;
 
     Vector2 min = new_Vector2(INT_MAX, INT_MAX);
     Vector2 max = new_Vector2(INT_MIN, INT_MIN);
 
-    for (int i = 0; i < obj->qtd_Pixel; i++) {
+    for (int i = 0; i < obj->qtd_pixel; i++) {
         Vector2 p = obj->info[i].position;
         if (p.x < min.x) min.x = p.x;
         if (p.y < min.y) min.y = p.y;
@@ -313,23 +352,34 @@ void centralizar_objeto(Objeto* obj)
         (min.y + max.y) / 2
     );
 
-    for (int i = 0; i < obj->qtd_Pixel; i++) 
+    for (int i = 0; i < obj->qtd_pixel; i++) 
         obj->info[i].position = vector_subtr(obj->info[i].position, centro);
 
     obj->size = vector_subtr(max, min);
 }
 
-Objeto* criar_objeto_custom (Pixel* info, int qtd_Pixel, bool normalizar)
+void centralizar_objeto_complexo(ObjetoComplexo* obj)
+{
+    if (obj->qtd_frames <= 0)
+        return;
+    
+    for (int i = 0; i < obj->qtd_frames; i++)
+    {
+        centralizar_objeto(obj->frames[i]);
+    }
+}
+
+Objeto* criar_objeto_custom (Pixel* info, int qtd_pixel, bool normalizar)
 {
     Objeto* o = (Objeto*)malloc(sizeof(Objeto));
     o->info = info;
     o->position = VETOR_NULO;
-    o->qtd_Pixel = qtd_Pixel;
+    o->qtd_pixel = qtd_pixel;
     o->renderizado = false;
     o->ref_node = NULL;
     Vector2 menor = info[0].position;
     Vector2 maior = VETOR_NULO;
-    for (int i = 0; i < qtd_Pixel; i++)
+    for (int i = 0; i < qtd_pixel; i++)
     {
         if (info[i].position.x < menor.x)
             menor.x = info[i].position.x;
@@ -353,7 +403,7 @@ Objeto* criar_retangulo_monocromatico (Color cor, Vector2 tamanho)
 {
     Objeto* o = (Objeto*)malloc(sizeof(Objeto));
     int area = tamanho.x * tamanho.y;
-    o->qtd_Pixel = area;
+    o->qtd_pixel = area;
     o->position = VETOR_NULO;
     o->renderizado = false;
     o->size = tamanho;
@@ -380,16 +430,16 @@ Objeto* recortar_objeto(Objeto* obj, Vector2 inicio, Vector2 fim)
     inicio = min_v;
     fim = max_v;
 
-    int nova_qtd_Pixel = 0;
-    Pixel* novos_pixeis = (Pixel*)malloc(obj->qtd_Pixel * sizeof(Pixel));
-    for (int i = 0; i < obj->qtd_Pixel; i++)
+    int nova_qtd_pixel = 0;
+    Pixel* novos_pixeis = (Pixel*)malloc(obj->qtd_pixel * sizeof(Pixel));
+    for (int i = 0; i < obj->qtd_pixel; i++)
     {
         Vector2 Pixel_pos = obj->info[i].position;
         if (Pixel_pos.x >= inicio.x && Pixel_pos.x <= fim.x && Pixel_pos.y >= inicio.y && Pixel_pos.y <= fim.y)
-            novos_pixeis[nova_qtd_Pixel++] = obj->info[i];
+            novos_pixeis[nova_qtd_pixel++] = obj->info[i];
     }
-    novos_pixeis = realloc(novos_pixeis, nova_qtd_Pixel*sizeof(Pixel));
-    return criar_objeto_custom(novos_pixeis, nova_qtd_Pixel, true);
+    novos_pixeis = realloc(novos_pixeis, nova_qtd_pixel*sizeof(Pixel));
+    return criar_objeto_custom(novos_pixeis, nova_qtd_pixel, true);
 }
 
 Objeto* criar_obj_eixos_debug(Screen* s)
@@ -404,12 +454,12 @@ Objeto* criar_obj_eixos_debug(Screen* s)
     int idx = 0;
     int halfW = w/2;
     for (int dx = -halfW; dx < w - halfW; dx++) 
-        info[idx++] = criar_Pixel(COLOR_BRANCO, new_Vector2(dx, 0));
+        info[idx++] = criar_pixel(COLOR_BRANCO, new_Vector2(dx, 0));
     
     int halfH = h/2;
     for (int dy = -halfH; dy < h - halfH; dy++)
         if (dy != 0)
-            info[idx++] = criar_Pixel(COLOR_BRANCO, new_Vector2(0, dy));
+            info[idx++] = criar_pixel(COLOR_BRANCO, new_Vector2(0, dy));
     
     if (idx != total) {
         fprintf(stderr, "Debug: esperado %d pixels mas gerou %d\n",
@@ -420,40 +470,67 @@ Objeto* criar_obj_eixos_debug(Screen* s)
     return criar_objeto_custom(info, total, false);
 }
 
-Objeto* merge_objeto (Objeto* prioridade, Objeto* novo, Vector2 pivot)
+Objeto* merge_objeto(Objeto* prioridade, Objeto* novo, Vector2 pivot)
 {
-    int new_size = prioridade->qtd_Pixel;
-    Pixel* info_prioridade = (Pixel*)malloc(new_size * sizeof(Pixel));
-    memcpy(info_prioridade, prioridade->info, new_size*sizeof(Pixel));
-    Pixel* info_novo = novo->info;
-    for (int i = 0; i < novo->qtd_Pixel; i++)
-        if (!obj_contem_Pixel_em(prioridade, vector_sum(pivot, info_novo[i].position)))
-            new_size++;
-    
-    if (new_size == prioridade->qtd_Pixel) 
-    {
-        free(info_prioridade);
-        excluir_objeto(novo);
-        return prioridade;
+    int max_size = prioridade->qtd_pixel + novo->qtd_pixel;
+    Pixel* merged_info = (Pixel*)malloc(max_size * sizeof(Pixel));
+    if (!merged_info) {
+        perror("Falha ao alocar memória em merge_objeto");
+        exit(EXIT_FAILURE);
     }
 
-    info_prioridade = realloc(info_prioridade, new_size * sizeof(Pixel));
-    int index = prioridade->qtd_Pixel;
-    for (int i = 0; i < novo->qtd_Pixel; i++)
-        if (!obj_contem_Pixel_em(prioridade, vector_sum(pivot, info_novo[i].position)))
-            info_prioridade[index++] = criar_Pixel(info_novo[i].cor, vector_sum(pivot, info_novo[i].position));
+    int count = 0;
+    for (int i = 0; i < prioridade->qtd_pixel; i++) 
+        merged_info[count++] = prioridade->info[i];
     
+    for (int i = 0; i < novo->qtd_pixel; i++) 
+    {
+        Vector2 pos_final = vector_sum(pivot, novo->info[i].position);
+
+        bool existe = false;
+        for (int j = 0; j < count; j++) 
+        {
+            if (compare_vector(merged_info[j].position, pos_final)) 
+            {
+                existe = true;
+                break;
+            }
+        }
+
+        if (!existe) 
+            merged_info[count++] = criar_pixel(novo->info[i].cor, pos_final);
+    }
+
     excluir_objeto(prioridade);
     excluir_objeto(novo);
-    return criar_objeto_custom(info_prioridade, new_size, true);
+
+    return criar_objeto_custom(merged_info, count, false);
 }
 
-Pixel deletar_Pixel (Screen* s, Vector2 pos) 
+Objeto* clonar_objeto(const Objeto* original) 
+{
+    if (!original) return NULL;
+
+    Pixel* copia_pixels = malloc(original->qtd_pixel * sizeof(Pixel));
+    if (!copia_pixels) return NULL;
+
+    memcpy(copia_pixels, original->info, original->qtd_pixel * sizeof(Pixel));
+
+    Objeto* novo = criar_objeto_custom(copia_pixels, original->qtd_pixel, true);
+
+    novo->position = original->position;
+    novo->renderizado = false;
+
+    return novo;
+}
+
+
+Pixel deletar_pixel (Screen* s, Vector2 pos) 
 {
     if (!vetor_valido_na_tela(s, pos)) 
-        return criar_Pixel(COLOR_PRETO, VETOR_NULO);
+        return criar_pixel(COLOR_PRETO, VETOR_NULO);
     
-    return desempilhar_Pixel(s->pixeis[pos.y][pos.x]);
+    return desempilhar_pixel(s->pixeis[pos.y][pos.x]);
 }
 
 Screen* criar_tela (Vector2 tamanho, Color fundo, int limiar_de_cor)
@@ -526,13 +603,13 @@ Animation criar_anim(int* frame_list, int qtd_frames, char nome[])
     return anim;
 }
 
-int* obj_complexo_contem_Pixel_em(ObjetoComplexo* obj, Vector2 pos, int* out_qtd_de_frames) 
+int* obj_complexo_contem_pixel_em(ObjetoComplexo* obj, Vector2 pos, int* out_qtd_de_frames) 
 {
     int* frames_que_contem = (int*)malloc(obj->qtd_frames * sizeof(int));
     int qtd_frames = 0;
 
     for (int i = 0; i < obj->qtd_frames; i++) 
-        if (obj_contem_Pixel_em(obj->frames[i], pos)) 
+        if (obj_contem_pixel_em(obj->frames[i], pos)) 
             frames_que_contem[qtd_frames++] = i;
 
     *out_qtd_de_frames = qtd_frames;
@@ -578,9 +655,9 @@ int compare_color(Color c1, Color c2)
     return dist_r + dist_g + dist_b;
 }
 
-bool obj_contem_Pixel_em (Objeto* obj, Vector2 pos)
+bool obj_contem_pixel_em (Objeto* obj, Vector2 pos)
 {
-    for (int i = 0; i < obj->qtd_Pixel; i++)
+    for (int i = 0; i < obj->qtd_pixel; i++)
         if (compare_vector(pos, obj->info[i].position))
             return true;
     
@@ -667,13 +744,13 @@ void setup_animations(ObjetoComplexo* obj, Animation anims[], int qtd_anims)
 
 void alterar_pivot_obj(Objeto* obj, Vector2 new_pivot)
 {
-    for (int i = 0; i < obj->qtd_Pixel; i++)
+    for (int i = 0; i < obj->qtd_pixel; i++)
         obj->info[i].position = vector_subtr(obj->info[i].position, new_pivot);
     
     Vector2 min = obj->info[0].position;
     Vector2 max = obj->info[0].position;
 
-    for (int i = 1; i < obj->qtd_Pixel; i++) 
+    for (int i = 1; i < obj->qtd_pixel; i++) 
     {
         if (obj->info[i].position.x < min.x) min.x = obj->info[i].position.x;
         if (obj->info[i].position.y < min.y) min.y = obj->info[i].position.y;
@@ -689,13 +766,13 @@ void alterar_pivot_frame(ObjetoComplexo* obj, int frame, Vector2 novo_pivot)
     obj->pivot_frames[frame] = novo_pivot;
     Objeto* frame_obj = obj->frames[frame];
 
-    for (int i = 0; i < frame_obj->qtd_Pixel; i++)
+    for (int i = 0; i < frame_obj->qtd_pixel; i++)
         frame_obj->info[i].position = vector_sum(frame_obj->info[i].position, novo_pivot);
 
     Vector2 min = frame_obj->info[0].position;
     Vector2 max = frame_obj->info[0].position;
 
-    for (int i = 1; i < frame_obj->qtd_Pixel; i++) 
+    for (int i = 1; i < frame_obj->qtd_pixel; i++) 
     {
         if (frame_obj->info[i].position.x < min.x) min.x = frame_obj->info[i].position.x;
         if (frame_obj->info[i].position.y < min.y) min.y = frame_obj->info[i].position.y;
@@ -722,14 +799,14 @@ void desenhar_objeto(Screen* s, Objeto* obj)
 
     char desenhou = 0;
 
-    for (int i = 0; i < obj->qtd_Pixel; i++)
+    for (int i = 0; i < obj->qtd_pixel; i++)
     {
-        Vector2 abs_px = get_abs_Pixel_pos(obj, i);
+        Vector2 abs_px = get_abs_pixel_pos(obj, i);
         Vector2 pixel_pos;
         if (vetor_aponta_para_area_visivel(s, abs_px, &pixel_pos))
         {
             desenhou = 1;
-            add_Pixel(s->pixeis[pixel_pos.y][pixel_pos.x], obj->info[i]);
+            add_pixel(s->pixeis[pixel_pos.y][pixel_pos.x], obj->info[i]);
         }
     }
 
@@ -743,7 +820,7 @@ void desenhar_objeto(Screen* s, Objeto* obj)
 
 void aplicar_filtro_obj(Objeto *obj, Color filtro)
 {
-    for (int i = 0; i < obj->qtd_Pixel; i++)
+    for (int i = 0; i < obj->qtd_pixel; i++)
         obj->info[i].cor = aplicar_filtro(obj->info[i].cor, filtro);
 }
 
@@ -757,7 +834,7 @@ void espelhar_objeto(Screen *s, Objeto *obj, bool horizontalmente)
     }
     
     Vector2 centro = centro_do_objeto(obj);
-    for (int i = 0; i < obj->qtd_Pixel; i++)
+    for (int i = 0; i < obj->qtd_pixel; i++)
     {
         Vector2 pos_relativa_centro = vector_sum(obj->info[i].position, reverse_vector(centro));
         if (horizontalmente)
@@ -796,14 +873,14 @@ void desenhar_objeto_complexo (Screen* s, ObjetoComplexo* obj)
     int frame = obj->frame_atual;
     
     char desenhou = '0';
-    for (int i = 0; i < obj->frames[frame]->qtd_Pixel; i++)
+    for (int i = 0; i < obj->frames[frame]->qtd_pixel; i++)
     {
-        Vector2 abs_px = get_complexo_abs_Pixel_pos(obj, frame, i);
+        Vector2 abs_px = get_complexo_abs_pixel_pos(obj, frame, i);
         Vector2 pixel_pos;
         if (vetor_aponta_para_area_visivel(s, abs_px, &pixel_pos))
         {
             desenhou = '1';
-            add_Pixel(s->pixeis[pixel_pos.y][pixel_pos.x], obj->frames[frame]->info[i]);
+            add_pixel(s->pixeis[pixel_pos.y][pixel_pos.x], obj->frames[frame]->info[i]);
         }
     }
 
@@ -843,12 +920,12 @@ void esconder_objeto(Screen* s, Objeto* obj)
 {
     if (!obj->renderizado) return;
     
-    for (int i = 0; i < obj->qtd_Pixel; i++)
+    for (int i = 0; i < obj->qtd_pixel; i++)
     {
-        Vector2 abs_px = get_abs_Pixel_pos(obj, i);
+        Vector2 abs_px = get_abs_pixel_pos(obj, i);
         Vector2 pixel_pos;
         if (vetor_aponta_para_area_visivel(s, abs_px, &pixel_pos))
-            deletar_Pixel(s, pixel_pos);
+            deletar_pixel(s, pixel_pos);
     }
     obj->renderizado = false;
     if (obj->ref_node != NULL)
@@ -863,12 +940,12 @@ void esconder_objeto_complexo (Screen* s, ObjetoComplexo* obj)
     if (obj->renderizado == false) return;
 
     int frame = obj->frame_atual;
-    for (int i = 0; i < obj->frames[obj->frame_atual]->qtd_Pixel; i++)
+    for (int i = 0; i < obj->frames[obj->frame_atual]->qtd_pixel; i++)
     {
-        Vector2 abs_px = get_complexo_abs_Pixel_pos(obj, frame, i);
+        Vector2 abs_px = get_complexo_abs_pixel_pos(obj, frame, i);
         Vector2 pixel_pos;
         if (vetor_aponta_para_area_visivel(s, abs_px, &pixel_pos))
-            deletar_Pixel(s, pixel_pos);
+            deletar_pixel(s, pixel_pos);
     }
     obj->renderizado = false;
     if (obj->ref_node != NULL)
@@ -903,7 +980,20 @@ void preencher_background (Screen* s, Color cor)
 {
     for (int i = 0; i < s->screen_size.y; i++)
         for (int j = 0; j < s->screen_size.x; j++)
-            add_Pixel(s->pixeis[i][j], criar_Pixel(cor, new_Vector2(i, j)));
+            add_pixel(s->pixeis[i][j], criar_pixel(cor, new_Vector2(i, j)));
+}
+
+
+void print_rgb_txt(Color cor_do_texto, Vector2 pos, const char *format, ...) 
+{
+    if (!compare_vector(pos, new_Vector2(-1, -1)))
+        moveCursor(pos);
+    printf("\033[38;2;%d;%d;%dm", cor_do_texto.r, cor_do_texto.g, cor_do_texto.b);
+    va_list args;
+    va_start(args, format);
+    vprintf(format, args);
+    va_end(args);
+    printf("\033[0m");
 }
 
 void printPixel(Pixel_Stack* p, int limiar_de_cor, Color cor_anterior)
@@ -912,9 +1002,9 @@ void printPixel(Pixel_Stack* p, int limiar_de_cor, Color cor_anterior)
     Color c = p->topo->pixel.cor;
 
     if (compare_color(c, cor_anterior) > limiar_de_cor) 
-        printf("\033[38;2;%d;%d;%dm", c.r, c.g, c.b);
+        printf("\033[48;2;%d;%d;%dm", c.r, c.g, c.b);
     
-    printf("@");
+    printf(" ");
 }
 
 void mover_objeto_complexo(Screen* s, ObjetoComplexo* obj, Vector2 direction)
@@ -924,34 +1014,90 @@ void mover_objeto_complexo(Screen* s, ObjetoComplexo* obj, Vector2 direction)
     desenhar_objeto_complexo(s, obj);
 }
 
-void rotacionar_objeto(Objeto *obj, Vector2 pivot, float graus)
+// Mds essa foi uma das funções mais cabulosas de fazer
+bool rotacionar_objeto(Screen* s, Objeto* obj, Vector2 pivot, float graus)
 {
-    Vector2 tam = obj->size;
-    bool grid[tam.x][tam.y];
-    memset(grid, false, sizeof(grid));
-
-    Pixel* novos_pixeis = (Pixel*)malloc(obj->qtd_Pixel * sizeof(Pixel));
-    int novo_count;
-
-    for (int i = 0; i < obj->qtd_Pixel; i++)
+    int min_x = INT_MAX, min_y = INT_MAX;
+    for (int i = 0; i < obj->qtd_pixel; i++) 
     {
-        Vector2 nova_pos = aplicar_matriz_rot(obj->info[i].position, pivot, graus);
-        if (!grid[nova_pos.x][nova_pos.y])
+        if (obj->info[i].position.x < min_x) min_x = obj->info[i].position.x;
+        if (obj->info[i].position.y < min_y) min_y = obj->info[i].position.y;
+    }
+    Vector2 ajuste_padrao = new_Vector2(-min_x, -min_y);
+
+    Pixel* temp = (Pixel*)malloc(obj->qtd_pixel * sizeof(Pixel));
+    for (int i = 0; i < obj->qtd_pixel; i++)
+        temp[i] = criar_pixel(obj->info[i].cor, vector_sum(obj->info[i].position, ajuste_padrao));
+    
+    pivot = vector_sum(pivot, ajuste_padrao);
+
+    int min_rx = INT_MAX, min_ry = INT_MAX;
+    int max_rx = INT_MIN, max_ry = INT_MIN;
+    for (int i = 0; i < obj->qtd_pixel; i++) 
+    {
+        Vector2 nova_pos = aplicar_matriz_rot(temp[i].position, pivot, graus);
+        if (nova_pos.x < min_rx) min_rx = nova_pos.x;
+        if (nova_pos.y < min_ry) min_ry = nova_pos.y;
+        if (nova_pos.x > max_rx) max_rx = nova_pos.x;
+        if (nova_pos.y > max_ry) max_ry = nova_pos.y;
+    }
+
+    Vector2 ajuste_rot = new_Vector2(-min_rx, -min_ry);
+
+    Vector2 grid_tam = new_Vector2(max_rx - min_rx + 1, max_ry - min_ry + 1);
+    bool** grid = (bool**)malloc(grid_tam.x * sizeof(bool*));
+    for (int i = 0; i < grid_tam.x; i++)
+        grid[i] = calloc(grid_tam.y, sizeof(bool));
+
+    Pixel* novos_pixeis = (Pixel*)malloc(obj->qtd_pixel * sizeof(Pixel));
+    int novo_count = 0;
+
+    char houve_rot = 0;
+    for (int i = 0; i < obj->qtd_pixel; i++) 
+    {
+        Vector2 nova_pos = aplicar_matriz_rot(temp[i].position, pivot, graus);
+        Vector2 ajustada = vector_sum(nova_pos, ajuste_rot);
+
+        if (!houve_rot && (nova_pos.x != temp[i].position.x || nova_pos.y != temp[i].position.y))
+            houve_rot = 1;
+
+        if (!grid[ajustada.x][ajustada.y]) 
         {
-            grid[nova_pos.x][nova_pos.y] = true;
-            Pixel novo_px = criar_Pixel(obj->info[i].cor, nova_pos);
-            novos_pixeis[novo_count++] = novo_px;
+            grid[ajustada.x][ajustada.y] = true;
+            Vector2 pos_final = vector_subtr(nova_pos, ajuste_padrao);
+            novos_pixeis[novo_count++] = criar_pixel(temp[i].cor, pos_final);
         }
     }
-    free(obj->info);
-    obj->info = novos_pixeis;
-    obj->qtd_Pixel = novo_count;
+
+    for (int x = 0; x < grid_tam.x; x++) free(grid[x]);
+    free(grid);
+    free(temp);
+
+    if (houve_rot == 0)
+    {
+        free(novos_pixeis);
+        return false;
+    }
+    else
+    {
+        if (s != NULL)
+            esconder_objeto(s, obj);
+        free(obj->info);
+        obj->info = realloc(novos_pixeis, novo_count * sizeof(Pixel));
+        obj->qtd_pixel = novo_count;
+        if (s != NULL)
+            desenhar_objeto(s, obj);
+        return true;
+    }
 }
 
-void rotacionar_objeto_complexo (ObjetoComplexo* obj, Vector2 pivot, float graus)
+void rotacionar_objeto_complexo (Screen* s, ObjetoComplexo* obj, Vector2 pivot, float graus)
 {
+    char redraw = false;
+    if (s != NULL) esconder_objeto_complexo(s, obj);
     for (int i = 0; i < obj->qtd_frames; i++)
-        rotacionar_objeto(obj->frames[i], pivot, graus);
+        redraw = (NULL, obj->frames[i], pivot, graus);
+    if (redraw == true) desenhar_objeto_complexo(s, obj);
 }
 
 void moveCursor(Vector2 v)
@@ -961,9 +1107,10 @@ void moveCursor(Vector2 v)
 
 void render(Screen* s, bool reset) 
 {
-    printf("\033[?25l");
     if (reset)
         moveCursor(VETOR_NULO);
+    printf("\033[?25l");
+    printf("\033[0m\n");
     
     Color cor_anterior = COR_NULA;
 
@@ -980,7 +1127,7 @@ void render(Screen* s, bool reset)
             }
         }
 
-        if (linha_igual)
+        if (linha_igual && i != s->screen_size.y - 1)
         {
             moveCursor((Vector2){0, i + 1});
             continue;
@@ -1008,12 +1155,12 @@ void aplicar_filtro_obj_complexo (ObjetoComplexo* obj, Color filtro)
 }
 
 //INTERNA
-Pixel* converter_piskel_frame_para_Pixel_info(const uint32_t frame_data[], int width, int height, int* qtd_Pixel, Vector2 offset) 
+Pixel* converter_piskel_frame_para_pixel_info(const uint32_t frame_data[], int width, int height, int* qtd_pixel, Vector2 offset) 
 {
-    int total_Pixels = width * height;
+    int total_pixels = width * height;
     int pixeis_coloridos = 0;
 
-    for (int i = 0; i < total_Pixels; i++)
+    for (int i = 0; i < total_pixels; i++)
         if(frame_data[i] != 0x00000000) 
             pixeis_coloridos++;
 
@@ -1025,24 +1172,24 @@ Pixel* converter_piskel_frame_para_Pixel_info(const uint32_t frame_data[], int w
     }
 
     int idx = 0;
-    for (int i = 0; i < total_Pixels; i++) 
+    for (int i = 0; i < total_pixels; i++) 
     {
         if(frame_data[i] == 0x00000000)
             continue;
         int x = i % width;
         int y = i / width;
         Color cor = converter_ABGR_para_Color(frame_data[i]);
-        info[idx++] = criar_Pixel(cor, vector_sum(offset, new_Vector2(x, y)));
+        info[idx++] = criar_pixel(cor, vector_sum(offset, new_Vector2(x, y)));
     }
     
-    *qtd_Pixel = pixeis_coloridos;
+    *qtd_pixel = pixeis_coloridos;
     return info;
 }
 
 Objeto* criar_piskel_obj(const uint32_t frame_data[], int width, int height)
 {
     int size;
-    Pixel* info = converter_piskel_frame_para_Pixel_info(frame_data, width, height, &size, VETOR_NULO);
+    Pixel* info = converter_piskel_frame_para_pixel_info(frame_data, width, height, &size, VETOR_NULO);
     return criar_objeto_custom(info, size, true);
 }
 
@@ -1118,7 +1265,7 @@ static Pixel* pixel_info_do_caractere (char c, Vector2 offset, int* out_qtd_pixe
     }
     
     if (tam_fonte == 1)
-        return converter_piskel_frame_para_Pixel_info(
+        return converter_piskel_frame_para_pixel_info(
             txt_font_data_1[char_index], 
             TXT_1_CHAR_WIDTH, 
             TXT_1_CHAR_HEIGHT, 
@@ -1126,7 +1273,7 @@ static Pixel* pixel_info_do_caractere (char c, Vector2 offset, int* out_qtd_pixe
             offset
         );
     else if (tam_fonte == 2)
-        return converter_piskel_frame_para_Pixel_info(
+        return converter_piskel_frame_para_pixel_info(
             txt_font_data_2[char_index], 
             TXT_2_CHAR_WIDTH, 
             TXT_2_CHAR_HEIGHT, 
@@ -1134,7 +1281,7 @@ static Pixel* pixel_info_do_caractere (char c, Vector2 offset, int* out_qtd_pixe
             offset
         );
     else if (tam_fonte == 3)
-        return converter_piskel_frame_para_Pixel_info(
+        return converter_piskel_frame_para_pixel_info(
             txt_font_data_3[char_index], 
             TXT_3_CHAR_WIDTH, 
             TXT_3_CHAR_HEIGHT, 
@@ -1150,12 +1297,17 @@ static Pixel* pixel_info_do_caractere (char c, Vector2 offset, int* out_qtd_pixe
 
 void trocar_cor_texto (Objeto* txt_obj, Color nova_cor)
 {
-    for (int i = 0; i < txt_obj->qtd_Pixel; i++)
+    for (int i = 0; i < txt_obj->qtd_pixel; i++)
         txt_obj->info[i].cor = nova_cor;
 }
 
-Objeto* criar_objeto_de_texto (char* texto, int espacamento, int tam_fonte)
+Objeto* criar_objeto_de_texto (int espacamento, int tam_fonte, const char* txt_formatado, ...)
 {
+    char texto[200];
+    va_list args;
+    va_start(args, txt_formatado);
+    vsnprintf(texto, sizeof(texto), txt_formatado, args);
+    va_end(args);
     if (tam_fonte < 1 || tam_fonte > 3)
     {
         fprintf(stderr, "1 - Tentou criar fonte com tamanho invalido = %d. A fonte so pode ter tamanho 1, 2 ou 3", tam_fonte);

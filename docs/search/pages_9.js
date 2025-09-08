@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['para_20terminal_0',['PetGraphycs - Biblioteca Gráfica para Terminal',['../index.html',1,'']]],
-  ['petgraphycs_20biblioteca_20gráfica_20para_20terminal_1',['PetGraphycs - Biblioteca Gráfica para Terminal',['../index.html',1,'']]],
-  ['piskel_2',['Usando Sprites do Piskel',['../index.html#autotoc_md3',1,'']]],
-  ['práticos_3',['Exemplos Práticos',['../index.html#autotoc_md6',1,'']]],
-  ['projeto_4',['1. Estrutura do Projeto',['../index.html#autotoc_md1',1,'']]]
+  ['modificar_20nada_0',['Se é Windows, não precisa modificar nada.',['../index.html#autotoc_md6',1,'']]],
+  ['modo_20prático_20single_20header_1',['🔹 Modo Prático (single-header)',['../index.html#autotoc_md5',1,'']]],
+  ['modo_20profissional_20recomendado_2',['🔹 Modo Profissional (recomendado)',['../index.html#autotoc_md4',1,'']]],
+  ['modos_20de_20uso_3',['2. Modos de Uso',['../index.html#autotoc_md3',1,'']]]
 ];

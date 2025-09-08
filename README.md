@@ -10,7 +10,9 @@ Compatível com sprites exportados do [Piskel](https://www.piskelapp.com/).
 \code{.unparsed}
 MinhaLib/
 ├── include/
-│   └── graphycs.h       // Cabeçalho público
+│   └── graphycs.h       // Cabeçalho público (modo profissional)
+│   └── graphycsTxt.h    // Cabeçalho de textos - inclusão automática
+│   └── graphycs_all.h   // Versão única (cabeçalho + implementação)
 ├── src/
 │   └── graphycs.c       // Código-fonte da biblioteca
 └── examples/            // Exemplos de uso
@@ -21,13 +23,49 @@ MinhaLib/
     └── 04_textos.c      // Exemplo: criação de textos para telas
 \endcode
 
-### 2. Compilação Básica
+---
 
-Para compilar um programa que usa a biblioteca:
+### 2. Modos de Uso
+
+A biblioteca pode ser usada de **duas formas**:
+
+#### 🔹 Modo Profissional (recomendado)
+
+Separando cabeçalho e código-fonte. Mais adequado para projetos médios e grandes.
 
 \code{.sh}
 gcc -Wall -Wextra -Iinclude meu_programa.c src/graphycs.c -o meu_programa
 \endcode
+
+#### 🔹 Modo Prático (single-header)
+
+Inclui tudo direto com `graphycs_all.h`.  
+Ideal para iniciantes ou projetos pequenos com apenas 1 arquivo `.c`.
+
+\code{.c}
+#include "include/graphycs_all.h"
+
+int main() 
+{
+    Screen* tela = criar_tela(new_Vector2(80, 25), COLOR_PRETO, 0);
+    // seu código...
+}
+\endcode
+
+Compilação fica simples, **sem precisar adicionar `src/graphycs.c`**:
+
+\code{.sh}
+gcc -Wall -Wextra meu_programa.c -o meu_programa
+\endcode
+
+Se seu Sistema Operacional é Linux/Posix, a primeira linha do seu código (antes de #include) deve ser:
+
+\code{.c}
+#define IN_LINUX_SO
+\endcode
+
+Se é Windows, não precisa modificar nada.
+---
 
 ## Usando Sprites do Piskel
 

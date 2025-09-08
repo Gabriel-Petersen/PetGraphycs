@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['smile_5fframe_5fcount_0',['SMILE_FRAME_COUNT',['../_smile_8h.html#a786354efc798eedfffa4795fa3cf1abc',1,'Smile.h']]],
-  ['smile_5fframe_5fheight_1',['SMILE_FRAME_HEIGHT',['../_smile_8h.html#abceb8fa7b389e078972f4e6628d1900f',1,'Smile.h']]],
-  ['smile_5fframe_5fwidth_2',['SMILE_FRAME_WIDTH',['../_smile_8h.html#aea626bb8a7da5a128f036a8a63941dc1',1,'Smile.h']]],
-  ['sol_5fframe_5fheight_3',['SOL_FRAME_HEIGHT',['../piskel__data_8h.html#ae544fe3b9ee6fbfef12730f5e6545bd4',1,'piskel_data.h']]],
-  ['sol_5fframe_5fwidth_4',['SOL_FRAME_WIDTH',['../piskel__data_8h.html#a32bfce83f3953f876fd33f1ea7b4d447',1,'piskel_data.h']]]
+  ['personagem_5fframe_5fcount_0',['PERSONAGEM_FRAME_COUNT',['../personagem_8c.html#ad207f202adfe7805af41f932f6abd3af',1,'PERSONAGEM_FRAME_COUNT:&#160;personagem.c'],['../personagem_8h.html#ad207f202adfe7805af41f932f6abd3af',1,'PERSONAGEM_FRAME_COUNT:&#160;personagem.h']]],
+  ['personagem_5fframe_5fheight_1',['PERSONAGEM_FRAME_HEIGHT',['../personagem_8c.html#ae0c780290c95507bccaa13f95c8ad9f7',1,'PERSONAGEM_FRAME_HEIGHT:&#160;personagem.c'],['../personagem_8h.html#ae0c780290c95507bccaa13f95c8ad9f7',1,'PERSONAGEM_FRAME_HEIGHT:&#160;personagem.h']]],
+  ['personagem_5fframe_5fwidth_2',['PERSONAGEM_FRAME_WIDTH',['../personagem_8c.html#a363b87a0b69b5615321e8fb06288c9ed',1,'PERSONAGEM_FRAME_WIDTH:&#160;personagem.c'],['../personagem_8h.html#a363b87a0b69b5615321e8fb06288c9ed',1,'PERSONAGEM_FRAME_WIDTH:&#160;personagem.h']]],
+  ['protagonista_5fframe_5fheight_3',['PROTAGONISTA_FRAME_HEIGHT',['../piskel__data_8h.html#a57a20041838b26e6d5a271d3d06b22a0',1,'piskel_data.h']]],
+  ['protagonista_5fframe_5fwidth_4',['PROTAGONISTA_FRAME_WIDTH',['../piskel__data_8h.html#a8f13b7acace74d0db0fb121f9f6460d6',1,'piskel_data.h']]]
 ];

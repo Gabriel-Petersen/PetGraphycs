@@ -6,10 +6,18 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include <conio.h>
 #include <stdint.h>
 #include <ctype.h>
 #include <limits.h>
+#include <stdarg.h>
+
+#ifndef IN_LINUX_SO
+    #include <conio.h>
+#else
+    #include <termios.h>
+    #include <unistd.h>
+    #include <fcntl.h>
+#endif
 
 /** @defgroup BasicTypes Tipos Básicos
  *  @brief Definições de estruturas fundamentais
@@ -56,8 +64,6 @@ typedef struct {
 #define COLOR_CIANO    (Color){0, 255, 255}
 /** @brief Cor branca (RGB: 255, 255, 255). */
 #define COLOR_BRANCO   (Color){255, 255, 255}
-/** @brief Cor nula  (Sem RGB-> (-10, -10, -10))*/
-#define COR_NULA       (Color){-10, -10, -10}
 /** @} */
 
 /** @defgroup VectorConstants Constantes de Vetores
@@ -178,7 +184,7 @@ typedef struct {
     Vector2 position;   /**< Posição global do objeto no espaço 2D. */
     Pixel* info;        /**< Vetor de pixeis que formam a imagem do objeto. */
     Vector2 size;       /**< Dimensões do objeto (largura, altura). */
-    int qtd_Pixel;      /**< Quantidade de pixeis no objeto. */
+    int qtd_pixel;      /**< Quantidade de pixeis no objeto. */
     bool renderizado;   /**< Flag que indica se o objeto está renderizado. */
     ObjNode* ref_node;
 } Objeto;
@@ -189,12 +195,12 @@ typedef struct {
  */
 typedef struct {
     Vector2 position;               /**< Posição global do objeto. */
-    Vector2* pivot_frames;          /**< Array de pontos de pivô customizados para cada frame (default = VETOR_NULO). */
+    Vector2* pivot_frames;          /**< Array de pontos de pivô customizados para cada frame - leitura (default = VETOR_NULO). */
     Objeto** frames;                /**< Array de ponteiros para Objetos (frames individuais). */
     AnimationManager* anim_manager; /**< Gerenciador de animações. */
     Vector2 size;                   /**< Dimensões do objeto. */
     bool renderizado;               /**< Flag de renderização. */
-    bool animar;                    /**< Se verdadeiro, avança automaticamente os frames. */
+    bool animar;                    /**< Se verdadeiro, está avançando automaticamente os frames. */
     int qtd_frames;                 /**< Quantidade total de frames. */
     int frame_atual;                /**< Frame atual sendo exibido. */
     ObjNode* ref_node;
@@ -340,17 +346,17 @@ Vector2 reverse_vector (Vector2 v);
  * @param index Índice do píxel dentro do vetor de pixeis
  * @return Vetor para a posição absoluta daquele pixel na tela.
  */
-Vector2 get_abs_Pixel_pos(Objeto* obj, int index);
+Vector2 get_abs_pixel_pos(Objeto* obj, int index);
 
 /**
  * @brief Retorna a posição absoluta do index-ésimo píxel do vetor de pixeis do frame-ésimo frame dentro do Objeto Complexo
  * @param obj Objeto Complexo dono do pixel
  * @param frame Frame do objeto complexo que contém o pixel
  * @param index Índice do píxel dentro do vetor de pixeis do frame dado
- * @see get_abs_Pixel_pos
+ * @see get_abs_pixel_pos
  * @return Vetor para a posição absoluta daquele pixel na tela.
  */
-Vector2 get_complexo_abs_Pixel_pos(ObjetoComplexo* obj, int frame, int index);
+Vector2 get_complexo_abs_pixel_pos(ObjetoComplexo* obj, int frame, int index);
 /** @} */
 
 /** @defgroup CenterOperations Centro Geométrico
@@ -391,7 +397,7 @@ Vector2 centro_da_tela(Screen* s);
  * @param pos Posição absoluta ou relativa do pixel.
  * @return Pixel configurado.
  */
-Pixel criar_Pixel(Color cor, Vector2 pos);
+Pixel criar_pixel(Color cor, Vector2 pos);
 
 /**
  * @brief Desempilha o pixel do topo da pilha de pixeis.
@@ -399,7 +405,7 @@ Pixel criar_Pixel(Color cor, Vector2 pos);
  * @return Pixel removido do topo.
  * @internal Usada internamente para gerenciar pilhas de pixels.
  */
-Pixel desempilhar_Pixel(Pixel_Stack* stack);
+Pixel desempilhar_pixel(Pixel_Stack* stack);
 
 /**
  * @brief Remove o pixel do topo da pilha na tela em posição dada.
@@ -407,7 +413,7 @@ Pixel desempilhar_Pixel(Pixel_Stack* stack);
  * @param pos Posição absoluta da pilha de pixels.
  * @return Pixel removido.
  */
-Pixel deletar_Pixel(Screen* s, Vector2 pos);
+Pixel deletar_pixel(Screen* s, Vector2 pos);
 /** @} */
 
 
@@ -419,12 +425,17 @@ Pixel deletar_Pixel(Screen* s, Vector2 pos);
 /**
  * @brief Cria um objeto customizado a partir de uma lista de pixels.
  * @param info Vetor de pixels (posições relativas a 0,0).
- * @param qtd_Pixel Quantidade de pixels em info.
+ * @param qtd_pixel Quantidade de pixels em info.
  * @param normalizar Se true, ajusta pixels para pivot em (0,0).
  * @return Ponteiro para o objeto criado, com posição inicial em (0,0).
  */
-Objeto* criar_objeto_custom(Pixel* info, int qtd_Pixel, bool normalizar);
-
+Objeto* criar_objeto_custom(Pixel* info, int qtd_pixel, bool normalizar);
+/**
+ * @brief Gera uma copia do objeto dado
+ * @param original Objeto original a ser clonado
+ * @return Ponteiro para o objeto clonado
+ */
+Objeto* clonar_objeto(const Objeto* original);
 /**
  * @brief Recorta parte de um objeto dentro de um retângulo definido.
  * @param obj Ponteiro para o objeto original.
@@ -530,7 +541,7 @@ Pixel get_pixel_em(Screen* s, Vector2 pos);
 /** @brief Retorna true se vetor está dentro dos limites do tamanho da tela. */
 bool vetor_valido_na_tela(Screen* s, Vector2 vet);
 /** @brief Retorna true se o vetor aponta para uma posição que a tela está renderizando no momento. (Se o vetor está visível na tela)
- * @param out_pos_rel Ponteiro de saída para um vetor que sai do canto superior esquerdo e aponta para a posição vet (dentro do espaço (0, 0) até s.screen_size)
+ *  @param out_pos_rel Ponteiro de saída para um vetor que sai do canto superior esquerdo e aponta para a posição vet (dentro do espaço (0, 0) até s.screen_size)
  */
 bool vetor_aponta_para_area_visivel(Screen* s, Vector2 vet, Vector2* out_pos_rel);
 /** @brief Compara igualdade entre dois vetores. */
@@ -540,7 +551,7 @@ int compare_color(Color c1, Color c2);
 /** @brief Debug: printa os valores do vetor com um título precedendo-o */
 void print_vector(Vector2 v, char* name);
 /** @brief Verifica se objeto simples contém pixel em posição relativa dada. */
-bool obj_contem_Pixel_em(Objeto* obj, Vector2 pos);
+bool obj_contem_pixel_em(Objeto* obj, Vector2 pos);
 /**
  * @brief Verifica em quais frames de um objeto complexo há pixel em posição.
  * @param obj Ponteiro para o objeto complexo.
@@ -548,7 +559,7 @@ bool obj_contem_Pixel_em(Objeto* obj, Vector2 pos);
  * @param out_qtd_de_frames Ponteiro para receber a quantidade de frames encontrados.
  * @return Vetor de índices de frames que contêm pixel na posição, ou NULL.
  */
-int* obj_complexo_contem_Pixel_em(ObjetoComplexo* obj, Vector2 pos, int* out_qtd_de_frames);
+int* obj_complexo_contem_pixel_em(ObjetoComplexo* obj, Vector2 pos, int* out_qtd_de_frames);
 /** @} */
 
 /** @defgroup AnimationControl Controle de Animações
@@ -616,19 +627,21 @@ void espelhar_objeto_complexo (Screen* s, ObjetoComplexo* obj, bool horizontalme
 /**
  * @brief Rotaciona um objeto simples em torno de um pivô.
  * @note Eventual perda de pixeis na imagem, função irreversível
+ * @param s Tela sob a qual o objeto está renderizado. Poder ser NULL
  * @param obj Ponteiro para o objeto.
  * @param pivot Ponto de rotação relativo ao objeto.
  * @param graus Ângulo em graus para rotacionar.
  */
-void rotacionar_objeto (Objeto* obj, Vector2 pivot, float graus);
+bool rotacionar_objeto(Screen* s, Objeto* obj, Vector2 pivot, float graus);
 /**
  * @brief Rotaciona um objeto complexo em torno de um pivô.
  * @note Eventual perda de pixeis na imagem, função irreversível
+ * @param s Tela sob a qual o objeto está renderizado. Pode ser NULL
  * @param obj Ponteiro para o objeto complexo.
  * @param pivot Ponto de rotação relativo ao objeto.
  * @param graus Ângulo em graus para rotacionar.
  */
-void rotacionar_objeto_complexo (ObjetoComplexo* obj, Vector2 pivot, float graus);
+void rotacionar_objeto_complexo (Screen* s, ObjetoComplexo* obj, Vector2 pivot, float graus);
 /** @} */
 
 /** @defgroup PivotOperations Operações de Pivô
@@ -646,6 +659,11 @@ void normalizar_objeto(Objeto* obj);
  * @param obj Ponteiro para o objeto.
  */
 void centralizar_objeto(Objeto* obj);
+/**
+ * @brief Centraliza o pivô do objeto complexo no centro geométrico em todos os frames.
+ * @param obj Ponteiro para o objeto complexo.
+ */
+void centralizar_objeto_complexo(ObjetoComplexo* obj);
 /**
  * @brief Altera o pivô de um objeto simples
  * @param obj Ponteiro para o objeto simples.
@@ -755,7 +773,8 @@ void mover_objeto_complexo(Screen* s, ObjetoComplexo* obj, Vector2 direction);
 /**
  * @brief Cria um objeto de texto a partir de um texto
  * @param espacamento Distância (em pixel) entre cada caractere
- * @param tam_fonte O tamanho da fonte, podendo ser 1, 2 ou 3. Quanto maior a fonte, maior a resolução. 
+ * @param tam_fonte O tamanho da fonte, podendo ser 1, 2 ou 3. Quanto maior a fonte, maior a resolução.
+ * @param txt_formatado O texto formatado a ser convertido no objeto de texto
  * @note Apenas 40 caracteres são suportados. 
  * Letras de A - Z;
  * Algarismos de 0 - 9; e os caracteres especiais:
@@ -764,9 +783,29 @@ void mover_objeto_complexo(Screen* s, ObjetoComplexo* obj, Vector2 direction);
  * Exclamação !
  * Interrogação ?
  */
-Objeto* criar_objeto_de_texto (char* texto, int espacamento, int tam_fonte);
+Objeto* criar_objeto_de_texto (int espacamento, int tam_fonte, const char* txt_formatado, ...);
 /** @brief Troca a cor de um texto inteiro (Preto por default) */
 void trocar_cor_texto (Objeto* txt_obj, Color nova_cor);
+
+/**
+ * @brief Realiza printf para escrever um texto no terminal dada uma cor e posição
+ * @param cor_do_texto A cor do texto que será printado
+ * @param pos A posição do texto na tela, 1-indexado com referencial de matriz. Note que (-1, -1) não alterará a posição do cursor
+ * @param format O texto formatado a ser printado
+ * @note Para fazer o print no mesmo lugar onde o cursor já está, passe o vetor como (-1, -1)
+ */
+void print_rgb_txt(Color cor_do_texto, Vector2 pos, const char *format, ...);
 /** @} */
+
+/**
+ * @brief Fazer #define USE_SHORTCUTS libera apelidos para termos e funções muito utilizados. Prático, mas não tão didático.
+ */
+#ifdef USE_SHORTCUTS
+#define nv2(x, y) new_Vector2(x, y)
+#define v_prod(v, x) produto_vetor_escalar(v, x)
+#define Obj Objeto*
+#define Complexo ObjetoComplexo*
+#define mov_obj(s, o, v) mover_objeto(s, o, v)
+#endif // USE_SHORTCUTS
 
 #endif // GRAPHYCS_H

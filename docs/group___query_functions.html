@@ -112,10 +112,10 @@ Funções</h2></td></tr>
 <tr class="memdesc:gaa93678d19e083278d5ccd566a789a171"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compara duas cores, retornando o quadrado da distância entre elas. (0 se as cores forem iguais)  <br /></td></tr>
 <tr class="memitem:ga02fe27649e873459cf151a71e42758d9" id="r_ga02fe27649e873459cf151a71e42758d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga02fe27649e873459cf151a71e42758d9">print_vector</a> (<a class="el" href="struct_vector2.html">Vector2</a> v, char *name)</td></tr>
 <tr class="memdesc:ga02fe27649e873459cf151a71e42758d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug: printa os valores do vetor com um título precedendo-o.  <br /></td></tr>
-<tr class="memitem:ga9a783abdc49b4e57696b83930101ff2a" id="r_ga9a783abdc49b4e57696b83930101ff2a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga9a783abdc49b4e57696b83930101ff2a">obj_contem_Pixel_em</a> (<a class="el" href="struct_objeto.html">Objeto</a> *obj, <a class="el" href="struct_vector2.html">Vector2</a> pos)</td></tr>
-<tr class="memdesc:ga9a783abdc49b4e57696b83930101ff2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifica se objeto simples contém pixel em posição relativa dada.  <br /></td></tr>
-<tr class="memitem:gace47d8601353e144a6cdc670b35b166b" id="r_gace47d8601353e144a6cdc670b35b166b"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gace47d8601353e144a6cdc670b35b166b">obj_complexo_contem_Pixel_em</a> (<a class="el" href="struct_objeto_complexo.html">ObjetoComplexo</a> *obj, <a class="el" href="struct_vector2.html">Vector2</a> pos, int *out_qtd_de_frames)</td></tr>
-<tr class="memdesc:gace47d8601353e144a6cdc670b35b166b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifica em quais frames de um objeto complexo há pixel em posição.  <br /></td></tr>
+<tr class="memitem:ga4c07d9873ce71aa3ff32c47793236398" id="r_ga4c07d9873ce71aa3ff32c47793236398"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga4c07d9873ce71aa3ff32c47793236398">obj_contem_pixel_em</a> (<a class="el" href="struct_objeto.html">Objeto</a> *obj, <a class="el" href="struct_vector2.html">Vector2</a> pos)</td></tr>
+<tr class="memdesc:ga4c07d9873ce71aa3ff32c47793236398"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifica se objeto simples contém pixel em posição relativa dada.  <br /></td></tr>
+<tr class="memitem:ga75f78fad72ebc171138fe6b2221c8065" id="r_ga75f78fad72ebc171138fe6b2221c8065"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga75f78fad72ebc171138fe6b2221c8065">obj_complexo_contem_pixel_em</a> (<a class="el" href="struct_objeto_complexo.html">ObjetoComplexo</a> *obj, <a class="el" href="struct_vector2.html">Vector2</a> pos, int *out_qtd_de_frames)</td></tr>
+<tr class="memdesc:ga75f78fad72ebc171138fe6b2221c8065"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifica em quais frames de um objeto complexo há pixel em posição.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descrição detalhada</h2>
 <p>Verificações de limites e presença de pixeis, vetores e cores. </p>
@@ -197,14 +197,14 @@ Funções</h2></td></tr>
 
 </div>
 </div>
-<a id="gace47d8601353e144a6cdc670b35b166b" name="gace47d8601353e144a6cdc670b35b166b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gace47d8601353e144a6cdc670b35b166b">&#9670;&#160;</a></span>obj_complexo_contem_Pixel_em()</h2>
+<a id="ga75f78fad72ebc171138fe6b2221c8065" name="ga75f78fad72ebc171138fe6b2221c8065"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga75f78fad72ebc171138fe6b2221c8065">&#9670;&#160;</a></span>obj_complexo_contem_pixel_em()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int * obj_complexo_contem_Pixel_em </td>
+          <td class="memname">int * obj_complexo_contem_pixel_em </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_objeto_complexo.html">ObjetoComplexo</a> *</td>          <td class="paramname"><span class="paramname"><em>obj</em></span>, </td>
         </tr>
@@ -234,14 +234,14 @@ Funções</h2></td></tr>
 
 </div>
 </div>
-<a id="ga9a783abdc49b4e57696b83930101ff2a" name="ga9a783abdc49b4e57696b83930101ff2a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga9a783abdc49b4e57696b83930101ff2a">&#9670;&#160;</a></span>obj_contem_Pixel_em()</h2>
+<a id="ga4c07d9873ce71aa3ff32c47793236398" name="ga4c07d9873ce71aa3ff32c47793236398"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4c07d9873ce71aa3ff32c47793236398">&#9670;&#160;</a></span>obj_contem_pixel_em()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool obj_contem_Pixel_em </td>
+          <td class="memname">bool obj_contem_pixel_em </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_objeto.html">Objeto</a> *</td>          <td class="paramname"><span class="paramname"><em>obj</em></span>, </td>
         </tr>

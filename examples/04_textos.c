@@ -16,9 +16,9 @@ int main ()
 
     // 2. Criação do objeto de texto
     Objeto* ola_mundo = criar_objeto_de_texto(
-        "Hello, World!", // A mensagem de texto que o objeto carrega
         1, // O espaçamento, em pixeis, entre os caracteres do texto
-        3 // O tamanho da fonte (só admite 1, 2 ou 3)
+        3, // O tamanho da fonte (só admite 1, 2 ou 3)
+        "Hello, World!" // A mensagem de texto que o objeto carrega
     );
     centralizar_objeto(ola_mundo);
 
@@ -29,11 +29,13 @@ int main ()
 
 
     // Criando um objeto de texto um pouco menor
-    Objeto* graficos_txt = criar_objeto_de_texto("Graficos!", 3, 2);
+    Objeto* graficos_txt = criar_objeto_de_texto(3, 2, "Graficos!");
     centralizar_objeto(graficos_txt);
     mover_objeto(tela, graficos_txt, produto_vetor_escalar(VETOR_BAIXO, 2));
 
-    Objeto* jogos_txt = criar_objeto_de_texto("Jogos?", 1, 1);
+    int numero = 4;
+    char texto[] = "Jogos";
+    Objeto* jogos_txt = criar_objeto_de_texto(1, 1, "%s %d", texto, numero);
     centralizar_objeto(jogos_txt);
     trocar_cor_texto(jogos_txt, COLOR_VERDE);
     mover_objeto(tela, jogos_txt, produto_vetor_escalar(VETOR_BAIXO, 10));

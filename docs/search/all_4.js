@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['alteração_20do_20arquivo_0',['1. Alteração do Arquivo',['../index.html#autotoc_md4',1,'']]],
+  ['alteração_20do_20arquivo_0',['1. Alteração do Arquivo',['../index.html#autotoc_md8',1,'']]],
   ['alterar_5fpivot_5fframe_1',['alterar_pivot_frame',['../group___pivot_operations.html#ga73b15518da626980d493b55053179eef',1,'alterar_pivot_frame(ObjetoComplexo *obj, int frame, Vector2 novo_pivot):&#160;graphycs.c'],['../group___pivot_operations.html#ga73b15518da626980d493b55053179eef',1,'alterar_pivot_frame(ObjetoComplexo *obj, int frame, Vector2 novo_pivot):&#160;graphycs.c']]],
   ['alterar_5fpivot_5fobj_2',['alterar_pivot_obj',['../group___pivot_operations.html#ga9a914d740e30f5c036c570eaae7a7221',1,'alterar_pivot_obj(Objeto *obj, Vector2 new_pivot):&#160;graphycs.c'],['../group___pivot_operations.html#ga9a914d740e30f5c036c570eaae7a7221',1,'alterar_pivot_obj(Objeto *obj, Vector2 new_pivot):&#160;graphycs.c']]],
   ['anim_5fatual_3',['anim_atual',['../struct_animation_manager.html#aa4dcba2dd3f96909251f35d7abd700ba',1,'AnimationManager']]],
@@ -17,7 +17,7 @@ var searchData=
   ['aplicar_5ffiltro_14',['aplicar_filtro',['../group___color_operations.html#gaf04663302563201ac277f7f6a39ec071',1,'aplicar_filtro(Color original, Color filtro):&#160;graphycs.c'],['../group___color_operations.html#gaf04663302563201ac277f7f6a39ec071',1,'aplicar_filtro(Color original, Color filtro):&#160;graphycs.c']]],
   ['aplicar_5ffiltro_5fobj_15',['aplicar_filtro_obj',['../group___filter_mirror_rotation.html#ga79b244d2e7e1e73d56c2061a530525a7',1,'aplicar_filtro_obj(Objeto *obj, Color filtro):&#160;graphycs.c'],['../group___filter_mirror_rotation.html#ga79b244d2e7e1e73d56c2061a530525a7',1,'aplicar_filtro_obj(Objeto *obj, Color filtro):&#160;graphycs.c']]],
   ['aplicar_5ffiltro_5fobj_5fcomplexo_16',['aplicar_filtro_obj_complexo',['../group___filter_mirror_rotation.html#gaf7e90a36f80516d0ee0ae321970ed0c6',1,'aplicar_filtro_obj_complexo(ObjetoComplexo *obj, Color filtro):&#160;graphycs.c'],['../group___filter_mirror_rotation.html#gaf7e90a36f80516d0ee0ae321970ed0c6',1,'aplicar_filtro_obj_complexo(ObjetoComplexo *obj, Color filtro):&#160;graphycs.c']]],
-  ['arquivo_17',['1. Alteração do Arquivo',['../index.html#autotoc_md4',1,'']]],
+  ['arquivo_17',['1. Alteração do Arquivo',['../index.html#autotoc_md8',1,'']]],
   ['arvore_5fframe_5fheight_18',['ARVORE_FRAME_HEIGHT',['../piskel__data_8h.html#acc3552fff052a8909308cde44013e93c',1,'piskel_data.h']]],
   ['arvore_5fframe_5fwidth_19',['ARVORE_FRAME_WIDTH',['../piskel__data_8h.html#aa467c3be29fdcc13683679832b9cc1ce',1,'piskel_data.h']]]
 ];

@@ -104,6 +104,8 @@ Funções</h2></td></tr>
 <tr class="memdesc:ga0a9e1328dfbaa8bac07db1c4a1f063e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normaliza objeto simples para ter pivô no canto superior esquerdo.  <br /></td></tr>
 <tr class="memitem:ga2b96bb68e41264140b3b1590fb78e85b" id="r_ga2b96bb68e41264140b3b1590fb78e85b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga2b96bb68e41264140b3b1590fb78e85b">centralizar_objeto</a> (<a class="el" href="struct_objeto.html">Objeto</a> *obj)</td></tr>
 <tr class="memdesc:ga2b96bb68e41264140b3b1590fb78e85b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Centraliza o pivô do objeto simples no centro geométrico.  <br /></td></tr>
+<tr class="memitem:ga633f196a10a35db2d15110f08dbb59f1" id="r_ga633f196a10a35db2d15110f08dbb59f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga633f196a10a35db2d15110f08dbb59f1">centralizar_objeto_complexo</a> (<a class="el" href="struct_objeto_complexo.html">ObjetoComplexo</a> *obj)</td></tr>
+<tr class="memdesc:ga633f196a10a35db2d15110f08dbb59f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Centraliza o pivô do objeto complexo no centro geométrico em todos os frames.  <br /></td></tr>
 <tr class="memitem:ga9a914d740e30f5c036c570eaae7a7221" id="r_ga9a914d740e30f5c036c570eaae7a7221"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga9a914d740e30f5c036c570eaae7a7221">alterar_pivot_obj</a> (<a class="el" href="struct_objeto.html">Objeto</a> *obj, <a class="el" href="struct_vector2.html">Vector2</a> new_pivot)</td></tr>
 <tr class="memdesc:ga9a914d740e30f5c036c570eaae7a7221"><td class="mdescLeft">&#160;</td><td class="mdescRight">Altera o pivô de um objeto simples.  <br /></td></tr>
 <tr class="memitem:ga73b15518da626980d493b55053179eef" id="r_ga73b15518da626980d493b55053179eef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga73b15518da626980d493b55053179eef">alterar_pivot_frame</a> (<a class="el" href="struct_objeto_complexo.html">ObjetoComplexo</a> *obj, int frame, <a class="el" href="struct_vector2.html">Vector2</a> novo_pivot)</td></tr>
@@ -197,6 +199,31 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">obj</td><td>Ponteiro para o objeto. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga633f196a10a35db2d15110f08dbb59f1" name="ga633f196a10a35db2d15110f08dbb59f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga633f196a10a35db2d15110f08dbb59f1">&#9670;&#160;</a></span>centralizar_objeto_complexo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void centralizar_objeto_complexo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_objeto_complexo.html">ObjetoComplexo</a> *</td>          <td class="paramname"><span class="paramname"><em>obj</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Centraliza o pivô do objeto complexo no centro geométrico em todos os frames. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">obj</td><td>Ponteiro para o objeto complexo. </td></tr>
   </table>
   </dd>
 </dl>

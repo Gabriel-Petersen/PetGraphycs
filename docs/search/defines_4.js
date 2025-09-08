@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['new_5fpiskel_5fframe_5fcount_0',['NEW_PISKEL_FRAME_COUNT',['../_smile_8c.html#a3157d0388b397929366be0137fafbe9f',1,'Smile.c']]],
-  ['new_5fpiskel_5fframe_5fheight_1',['NEW_PISKEL_FRAME_HEIGHT',['../_smile_8c.html#a0fd25e80b5f9c34c062f4284bded97d9',1,'Smile.c']]],
-  ['new_5fpiskel_5fframe_5fwidth_2',['NEW_PISKEL_FRAME_WIDTH',['../_smile_8c.html#aaea99c87bb0ee1ec2813238f58da8dc6',1,'Smile.c']]]
+  ['max_0',['max',['../graphycs_8c.html#affe776513b24d84b39af8ab0930fef7f',1,'graphycs.c']]],
+  ['min_1',['min',['../graphycs_8c.html#ac6afabdc09a49a433ee19d8a9486056d',1,'graphycs.c']]]
 ];

@@ -102,7 +102,9 @@ Como Compilar</h2>
 1. Estrutura do Projeto</h3>
 <div class="fragment"><div class="line">MinhaLib/</div>
 <div class="line">├── include/</div>
-<div class="line">│   └── graphycs.h       // Cabeçalho público</div>
+<div class="line">│   └── graphycs.h       // Cabeçalho público (modo profissional)</div>
+<div class="line">│   └── graphycsTxt.h    // Cabeçalho de textos - inclusão automática</div>
+<div class="line">│   └── graphycs_all.h   // Versão única (cabeçalho + implementação)</div>
 <div class="line">├── src/</div>
 <div class="line">│   └── graphycs.c       // Código-fonte da biblioteca</div>
 <div class="line">└── examples/            // Exemplos de uso</div>
@@ -111,13 +113,40 @@ Como Compilar</h2>
 <div class="line">    ├── 02_piskel.c      // Exemplo: uso de sprites do Piskel</div>
 <div class="line">    └── 03_animacao.c    // Exemplo: animações com spritesheets</div>
 <div class="line">    └── 04_textos.c      // Exemplo: criação de textos para telas</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
-2. Compilação Básica</h3>
-<p>Para compilar um programa que usa a biblioteca:</p>
+</div><!-- fragment --><hr  />
+<h3 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
+2. Modos de Uso</h3>
+<p>A biblioteca pode ser usada de <b>duas formas</b>:</p>
+<h4 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
+🔹 Modo Profissional (recomendado)</h4>
+<p>Separando cabeçalho e código-fonte. Mais adequado para projetos médios e grandes.</p>
 <div class="fragment"><div class="line">gcc -Wall -Wextra -Iinclude meu_programa.c src/graphycs.c -o meu_programa</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
+</div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
+🔹 Modo Prático (single-header)</h4>
+<p>Inclui tudo direto com <span class="tt">graphycs_all.h</span>. <br  />
+ Ideal para iniciantes ou projetos pequenos com apenas 1 arquivo <span class="tt">.c</span>.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="graphycs__all_8h.html">include/graphycs_all.h</a>&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="01__basico_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>() </div>
+<div class="line">{</div>
+<div class="line">    <a class="code hl_struct" href="struct_screen.html">Screen</a>* tela = <a class="code hl_function" href="group___input_output.html#ga0512a73dfbcb6c0a9f2f7b33089d7983">criar_tela</a>(<a class="code hl_function" href="group___vector_operations.html#gaeb789c14ba178d7163613548c1e22b1e">new_Vector2</a>(80, 25), <a class="code hl_define" href="group___color_constants.html#ga4a4c2277aea9f0fb1b634d26cb8a7e11">COLOR_PRETO</a>, 0);</div>
+<div class="line">    <span class="comment">// seu código...</span></div>
+<div class="line">}</div>
+<div class="ttc" id="a01__basico_8c_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="01__basico_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definição</b> 01_basico.c:7</div></div>
+<div class="ttc" id="agraphycs__all_8h_html"><div class="ttname"><a href="graphycs__all_8h.html">graphycs_all.h</a></div></div>
+<div class="ttc" id="agroup___color_constants_html_ga4a4c2277aea9f0fb1b634d26cb8a7e11"><div class="ttname"><a href="group___color_constants.html#ga4a4c2277aea9f0fb1b634d26cb8a7e11">COLOR_PRETO</a></div><div class="ttdeci">#define COLOR_PRETO</div><div class="ttdoc">Cor preta (RGB: 0, 0, 0).</div><div class="ttdef"><b>Definição</b> graphycs.h:52</div></div>
+<div class="ttc" id="agroup___input_output_html_ga0512a73dfbcb6c0a9f2f7b33089d7983"><div class="ttname"><a href="group___input_output.html#ga0512a73dfbcb6c0a9f2f7b33089d7983">criar_tela</a></div><div class="ttdeci">Screen * criar_tela(Vector2 tamanho, Color fundo, int limiar_de_cor)</div><div class="ttdoc">Cria o objeto de tela que será renderizado.</div><div class="ttdef"><b>Definição</b> graphycs.c:536</div></div>
+<div class="ttc" id="agroup___vector_operations_html_gaeb789c14ba178d7163613548c1e22b1e"><div class="ttname"><a href="group___vector_operations.html#gaeb789c14ba178d7163613548c1e22b1e">new_Vector2</a></div><div class="ttdeci">Vector2 new_Vector2(int x, int y)</div><div class="ttdoc">Retorna um novo vetor dados x e y.</div><div class="ttdef"><b>Definição</b> graphycs.c:154</div></div>
+<div class="ttc" id="astruct_screen_html"><div class="ttname"><a href="struct_screen.html">Screen</a></div><div class="ttdoc">Estrutura da tela sob a qual os objetos serão renderizados.</div><div class="ttdef"><b>Definição</b> graphycs.h:214</div></div>
+</div><!-- fragment --><p>Compilação fica simples, <b>sem precisar adicionar <span class="tt">src/graphycs.c</span></b>:</p>
+<div class="fragment"><div class="line">gcc -Wall -Wextra meu_programa.c -o meu_programa</div>
+</div><!-- fragment --><p>Se seu Sistema Operacional é Linux/Posix, a primeira linha do seu código (antes de include) deve ser:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#define IN_LINUX_SO</span></div>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
+Se é Windows, não precisa modificar nada.</h2>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
 Usando Sprites do Piskel</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
 1. Alteração do Arquivo</h3>
 <ul>
 <li>Exporte seu sprite no Piskel como arquivo C</li>
@@ -133,13 +162,13 @@ Usando Sprites do Piskel</h2>
 <li>Adicione no final:</li>
 </ul>
 <div class="fragment"><div class="line"><span class="preprocessor">#endif</span></div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
 2. Uso no seu código</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;meu_sprite.h&quot;</span> <span class="comment">// Use o caminho correto (ex: &quot;assets/meu_sprite.h&quot;)</span></div>
 <div class="line"><a class="code hl_struct" href="struct_objeto.html">Objeto</a>* sprite = <a class="code hl_function" href="group___simple_object_operations.html#gad1bf0d3ec70950817cda7f61de7e7d38">criar_piskel_obj</a>(sprite_data, SPRITE_WIDTH, SPRITE_HEIGHT);</div>
-<div class="ttc" id="agroup___simple_object_operations_html_gad1bf0d3ec70950817cda7f61de7e7d38"><div class="ttname"><a href="group___simple_object_operations.html#gad1bf0d3ec70950817cda7f61de7e7d38">criar_piskel_obj</a></div><div class="ttdeci">Objeto * criar_piskel_obj(const uint32_t frame_data[], int width, int height)</div><div class="ttdoc">Cria um objeto a partir de dados de um frame do Piskel.</div><div class="ttdef"><b>Definição</b> graphycs.c:1042</div></div>
-<div class="ttc" id="astruct_objeto_html"><div class="ttname"><a href="struct_objeto.html">Objeto</a></div><div class="ttdoc">Representa um objeto gráfico estático (um único frame).</div><div class="ttdef"><b>Definição</b> graphycs.h:177</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
+<div class="ttc" id="agroup___simple_object_operations_html_gad1bf0d3ec70950817cda7f61de7e7d38"><div class="ttname"><a href="group___simple_object_operations.html#gad1bf0d3ec70950817cda7f61de7e7d38">criar_piskel_obj</a></div><div class="ttdeci">Objeto * criar_piskel_obj(const uint32_t frame_data[], int width, int height)</div><div class="ttdoc">Cria um objeto a partir de dados de um frame do Piskel.</div><div class="ttdef"><b>Definição</b> graphycs.c:1189</div></div>
+<div class="ttc" id="astruct_objeto_html"><div class="ttname"><a href="struct_objeto.html">Objeto</a></div><div class="ttdoc">Representa um objeto gráfico estático (um único frame).</div><div class="ttdef"><b>Definição</b> graphycs.h:183</div></div>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
 Exemplos Práticos</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -158,7 +187,7 @@ Exemplos Práticos</h2>
 <div class="line">./examples/piskel.exe</div>
 <div class="line">./examples/animacao.exe</div>
 <div class="line">./examples/textos.exe</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md11"></a>
 Documentação</h2>
 <p>Acesse a documentação gerada pelo Doxygen: <br  />
  🔗 <a href="https://gabriel-petersen.github.io/PetGraphycs/">https://gabriel-petersen.github.io/PetGraphycs/</a> </p>

@@ -1,15 +1,7 @@
 var searchData=
 [
-  ['r_0',['r',['../struct_color.html#acab531abaa74a7e664e3986f2522b33a',1,'Color']]],
-  ['readme_2emd_1',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]],
-  ['recortar_5fobjeto_2',['recortar_objeto',['../group___simple_object_operations.html#ga96ce79f107ec838190e4b423ca627e3a',1,'recortar_objeto(Objeto *obj, Vector2 inicio, Vector2 fim):&#160;graphycs.c'],['../group___simple_object_operations.html#ga96ce79f107ec838190e4b423ca627e3a',1,'recortar_objeto(Objeto *obj, Vector2 inicio, Vector2 fim):&#160;graphycs.c']]],
-  ['ref_5fnode_3',['ref_node',['../struct_objeto.html#abd6f019a46c0c7661611acfecb51e33e',1,'Objeto::ref_node'],['../struct_objeto_complexo.html#abd6f019a46c0c7661611acfecb51e33e',1,'ObjetoComplexo::ref_node']]],
-  ['render_4',['render',['../group___screen_operations.html#gaec4dc4a926c26cdfe7ffdbbb1d40b606',1,'render(Screen *s, bool reset):&#160;graphycs.c'],['../group___screen_operations.html#gaec4dc4a926c26cdfe7ffdbbb1d40b606',1,'render(Screen *s, bool reset):&#160;graphycs.c']]],
-  ['renderização_20de_20textos_5',['Renderização de textos',['../group___texts.html',1,'']]],
-  ['renderizado_6',['renderizado',['../struct_objeto.html#a1bb27014f6192c9e5f53ae388211f60e',1,'Objeto::renderizado'],['../struct_objeto_complexo.html#a1bb27014f6192c9e5f53ae388211f60e',1,'ObjetoComplexo::renderizado']]],
-  ['reverse_5fvector_7',['reverse_vector',['../group___vector_operations.html#ga8f38c9e8021a0aba7cf2190793507f36',1,'reverse_vector(Vector2 v):&#160;graphycs.c'],['../group___vector_operations.html#ga8f38c9e8021a0aba7cf2190793507f36',1,'reverse_vector(Vector2 v):&#160;graphycs.c']]],
-  ['rgb_8',['Operações com Cores RGB',['../group___color_operations.html',1,'']]],
-  ['rotação_9',['Filtro, Espelhamento e Rotação',['../group___filter_mirror_rotation.html',1,'']]],
-  ['rotacionar_5fobjeto_10',['rotacionar_objeto',['../group___filter_mirror_rotation.html#gabada0b3efe19b81383463fe81b5f86a7',1,'rotacionar_objeto(Objeto *obj, Vector2 pivot, float graus):&#160;graphycs.c'],['../group___filter_mirror_rotation.html#gabada0b3efe19b81383463fe81b5f86a7',1,'rotacionar_objeto(Objeto *obj, Vector2 pivot, float graus):&#160;graphycs.c']]],
-  ['rotacionar_5fobjeto_5fcomplexo_11',['rotacionar_objeto_complexo',['../group___filter_mirror_rotation.html#gaf2ce318471770a1dedffb5c3ea65691f',1,'rotacionar_objeto_complexo(ObjetoComplexo *obj, Vector2 pivot, float graus):&#160;graphycs.c'],['../group___filter_mirror_rotation.html#gaf2ce318471770a1dedffb5c3ea65691f',1,'rotacionar_objeto_complexo(ObjetoComplexo *obj, Vector2 pivot, float graus):&#160;graphycs.c']]]
+  ['qtd_0',['qtd',['../struct_obj___linked___list.html#ab64e355d6f14927f41266ddfbf88ac91',1,'Obj_Linked_List']]],
+  ['qtd_5fanims_1',['qtd_anims',['../struct_animation_manager.html#ac006accbd9c6246bd65bed82b4d02ab5',1,'AnimationManager']]],
+  ['qtd_5fframes_2',['qtd_frames',['../struct_animation.html#a440eeaa88904f349722855580d73ea89',1,'Animation::qtd_frames'],['../struct_objeto_complexo.html#a440eeaa88904f349722855580d73ea89',1,'ObjetoComplexo::qtd_frames']]],
+  ['qtd_5fpixel_3',['qtd_pixel',['../struct_objeto.html#acd6e9289876bf1b2b1b3b797143a94b9',1,'Objeto']]]
 ];

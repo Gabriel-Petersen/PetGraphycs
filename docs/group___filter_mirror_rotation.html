@@ -108,10 +108,10 @@ Funções</h2></td></tr>
 <tr class="memdesc:gaf949978a7bdc1d132a73732f90ae6016"><td class="mdescLeft">&#160;</td><td class="mdescRight">Espelha um objeto simples horizontalmente ou verticalmente.  <br /></td></tr>
 <tr class="memitem:ga568f49b68fad2710cdfe5af41b057579" id="r_ga568f49b68fad2710cdfe5af41b057579"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga568f49b68fad2710cdfe5af41b057579">espelhar_objeto_complexo</a> (<a class="el" href="struct_screen.html">Screen</a> *s, <a class="el" href="struct_objeto_complexo.html">ObjetoComplexo</a> *obj, bool horizontalmente)</td></tr>
 <tr class="memdesc:ga568f49b68fad2710cdfe5af41b057579"><td class="mdescLeft">&#160;</td><td class="mdescRight">Espelha todos os frames de um objeto complexo horizontalmente ou verticalmente.  <br /></td></tr>
-<tr class="memitem:gabada0b3efe19b81383463fe81b5f86a7" id="r_gabada0b3efe19b81383463fe81b5f86a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gabada0b3efe19b81383463fe81b5f86a7">rotacionar_objeto</a> (<a class="el" href="struct_objeto.html">Objeto</a> *obj, <a class="el" href="struct_vector2.html">Vector2</a> pivot, float graus)</td></tr>
-<tr class="memdesc:gabada0b3efe19b81383463fe81b5f86a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotaciona um objeto simples em torno de um pivô.  <br /></td></tr>
-<tr class="memitem:gaf2ce318471770a1dedffb5c3ea65691f" id="r_gaf2ce318471770a1dedffb5c3ea65691f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gaf2ce318471770a1dedffb5c3ea65691f">rotacionar_objeto_complexo</a> (<a class="el" href="struct_objeto_complexo.html">ObjetoComplexo</a> *obj, <a class="el" href="struct_vector2.html">Vector2</a> pivot, float graus)</td></tr>
-<tr class="memdesc:gaf2ce318471770a1dedffb5c3ea65691f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotaciona um objeto complexo em torno de um pivô.  <br /></td></tr>
+<tr class="memitem:gaf7191ac503def050959810a1796810eb" id="r_gaf7191ac503def050959810a1796810eb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gaf7191ac503def050959810a1796810eb">rotacionar_objeto</a> (<a class="el" href="struct_screen.html">Screen</a> *s, <a class="el" href="struct_objeto.html">Objeto</a> *obj, <a class="el" href="struct_vector2.html">Vector2</a> pivot, float graus)</td></tr>
+<tr class="memdesc:gaf7191ac503def050959810a1796810eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotaciona um objeto simples em torno de um pivô.  <br /></td></tr>
+<tr class="memitem:ga0f805c07c6f4e6aea190c2f92d51bb12" id="r_ga0f805c07c6f4e6aea190c2f92d51bb12"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga0f805c07c6f4e6aea190c2f92d51bb12">rotacionar_objeto_complexo</a> (<a class="el" href="struct_screen.html">Screen</a> *s, <a class="el" href="struct_objeto_complexo.html">ObjetoComplexo</a> *obj, <a class="el" href="struct_vector2.html">Vector2</a> pivot, float graus)</td></tr>
+<tr class="memdesc:ga0f805c07c6f4e6aea190c2f92d51bb12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotaciona um objeto complexo em torno de um pivô.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descrição detalhada</h2>
 <p>Funções para modificar cor, ângulo e simetria de objetos. </p>
@@ -248,15 +248,20 @@ Funções</h2></td></tr>
 
 </div>
 </div>
-<a id="gabada0b3efe19b81383463fe81b5f86a7" name="gabada0b3efe19b81383463fe81b5f86a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gabada0b3efe19b81383463fe81b5f86a7">&#9670;&#160;</a></span>rotacionar_objeto()</h2>
+<a id="gaf7191ac503def050959810a1796810eb" name="gaf7191ac503def050959810a1796810eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf7191ac503def050959810a1796810eb">&#9670;&#160;</a></span>rotacionar_objeto()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void rotacionar_objeto </td>
+          <td class="memname">bool rotacionar_objeto </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_screen.html">Screen</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_objeto.html">Objeto</a> *</td>          <td class="paramname"><span class="paramname"><em>obj</em></span>, </td>
         </tr>
         <tr>
@@ -276,6 +281,7 @@ Funções</h2></td></tr>
 <dl class="section note"><dt>Nota</dt><dd>Eventual perda de pixeis na imagem, função irreversível </dd></dl>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
+    <tr><td class="paramname">s</td><td>Tela sob a qual o objeto está renderizado. Poder ser NULL </td></tr>
     <tr><td class="paramname">obj</td><td>Ponteiro para o objeto. </td></tr>
     <tr><td class="paramname">pivot</td><td>Ponto de rotação relativo ao objeto. </td></tr>
     <tr><td class="paramname">graus</td><td>Ângulo em graus para rotacionar. </td></tr>
@@ -285,8 +291,8 @@ Funções</h2></td></tr>
 
 </div>
 </div>
-<a id="gaf2ce318471770a1dedffb5c3ea65691f" name="gaf2ce318471770a1dedffb5c3ea65691f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaf2ce318471770a1dedffb5c3ea65691f">&#9670;&#160;</a></span>rotacionar_objeto_complexo()</h2>
+<a id="ga0f805c07c6f4e6aea190c2f92d51bb12" name="ga0f805c07c6f4e6aea190c2f92d51bb12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0f805c07c6f4e6aea190c2f92d51bb12">&#9670;&#160;</a></span>rotacionar_objeto_complexo()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -294,6 +300,11 @@ Funções</h2></td></tr>
         <tr>
           <td class="memname">void rotacionar_objeto_complexo </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_screen.html">Screen</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_objeto_complexo.html">ObjetoComplexo</a> *</td>          <td class="paramname"><span class="paramname"><em>obj</em></span>, </td>
         </tr>
         <tr>
@@ -313,6 +324,7 @@ Funções</h2></td></tr>
 <dl class="section note"><dt>Nota</dt><dd>Eventual perda de pixeis na imagem, função irreversível </dd></dl>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
+    <tr><td class="paramname">s</td><td>Tela sob a qual o objeto está renderizado. Pode ser NULL </td></tr>
     <tr><td class="paramname">obj</td><td>Ponteiro para o objeto complexo. </td></tr>
     <tr><td class="paramname">pivot</td><td>Ponto de rotação relativo ao objeto. </td></tr>
     <tr><td class="paramname">graus</td><td>Ângulo em graus para rotacionar. </td></tr>

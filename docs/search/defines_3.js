@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['max_0',['max',['../graphycs_8c.html#affe776513b24d84b39af8ab0930fef7f',1,'graphycs.c']]],
-  ['min_1',['min',['../graphycs_8c.html#ac6afabdc09a49a433ee19d8a9486056d',1,'graphycs.c']]]
+  ['cor_5fnula_0',['COR_NULA',['../graphycs_8c.html#a129b6202b1fbb3a2ef41ab3f56abaeef',1,'graphycs.c']]]
 ];

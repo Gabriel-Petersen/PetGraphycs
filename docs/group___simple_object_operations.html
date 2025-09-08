@@ -100,8 +100,10 @@ $(function(){initNavTree('group___simple_object_operations.html','',''); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Funções</h2></td></tr>
-<tr class="memitem:ga4a30aacec6dcff78d5c0cd55c7b59b00" id="r_ga4a30aacec6dcff78d5c0cd55c7b59b00"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_objeto.html">Objeto</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga4a30aacec6dcff78d5c0cd55c7b59b00">criar_objeto_custom</a> (<a class="el" href="struct_pixel.html">Pixel</a> *info, int qtd_Pixel, bool normalizar)</td></tr>
-<tr class="memdesc:ga4a30aacec6dcff78d5c0cd55c7b59b00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cria um objeto customizado a partir de uma lista de pixels.  <br /></td></tr>
+<tr class="memitem:ga9740e623238c178a1e69ebb758a5c81b" id="r_ga9740e623238c178a1e69ebb758a5c81b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_objeto.html">Objeto</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga9740e623238c178a1e69ebb758a5c81b">criar_objeto_custom</a> (<a class="el" href="struct_pixel.html">Pixel</a> *info, int qtd_pixel, bool normalizar)</td></tr>
+<tr class="memdesc:ga9740e623238c178a1e69ebb758a5c81b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cria um objeto customizado a partir de uma lista de pixels.  <br /></td></tr>
+<tr class="memitem:gab20138a35ed92db3889595c969a4caff" id="r_gab20138a35ed92db3889595c969a4caff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_objeto.html">Objeto</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gab20138a35ed92db3889595c969a4caff">clonar_objeto</a> (const <a class="el" href="struct_objeto.html">Objeto</a> *original)</td></tr>
+<tr class="memdesc:gab20138a35ed92db3889595c969a4caff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gera uma copia do objeto dado.  <br /></td></tr>
 <tr class="memitem:ga96ce79f107ec838190e4b423ca627e3a" id="r_ga96ce79f107ec838190e4b423ca627e3a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_objeto.html">Objeto</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga96ce79f107ec838190e4b423ca627e3a">recortar_objeto</a> (<a class="el" href="struct_objeto.html">Objeto</a> *obj, <a class="el" href="struct_vector2.html">Vector2</a> inicio, <a class="el" href="struct_vector2.html">Vector2</a> fim)</td></tr>
 <tr class="memdesc:ga96ce79f107ec838190e4b423ca627e3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recorta parte de um objeto dentro de um retângulo definido.  <br /></td></tr>
 <tr class="memitem:ga7cfb70d622e6b884f917541cd49258e8" id="r_ga7cfb70d622e6b884f917541cd49258e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_objeto.html">Objeto</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga7cfb70d622e6b884f917541cd49258e8">criar_retangulo_monocromatico</a> (<a class="el" href="struct_color.html">Color</a> cor, <a class="el" href="struct_vector2.html">Vector2</a> tamanho)</td></tr>
@@ -116,6 +118,32 @@ Funções</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descrição detalhada</h2>
 <p>Criação e edição de objetos baseados em pixels. </p>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentação das funções</h2>
+<a id="gab20138a35ed92db3889595c969a4caff" name="gab20138a35ed92db3889595c969a4caff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab20138a35ed92db3889595c969a4caff">&#9670;&#160;</a></span>clonar_objeto()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_objeto.html">Objeto</a> * clonar_objeto </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_objeto.html">Objeto</a> *</td>          <td class="paramname"><span class="paramname"><em>original</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gera uma copia do objeto dado. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">original</td><td><a class="el" href="struct_objeto.html" title="Representa um objeto gráfico estático (um único frame).">Objeto</a> original a ser clonado </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Ponteiro para o objeto clonado </dd></dl>
+
+</div>
+</div>
 <a id="gac44e98d22ec66b70823f82c45552d5d3" name="gac44e98d22ec66b70823f82c45552d5d3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gac44e98d22ec66b70823f82c45552d5d3">&#9670;&#160;</a></span>criar_obj_eixos_debug()</h2>
 
@@ -142,8 +170,8 @@ Funções</h2></td></tr>
 
 </div>
 </div>
-<a id="ga4a30aacec6dcff78d5c0cd55c7b59b00" name="ga4a30aacec6dcff78d5c0cd55c7b59b00"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga4a30aacec6dcff78d5c0cd55c7b59b00">&#9670;&#160;</a></span>criar_objeto_custom()</h2>
+<a id="ga9740e623238c178a1e69ebb758a5c81b" name="ga9740e623238c178a1e69ebb758a5c81b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9740e623238c178a1e69ebb758a5c81b">&#9670;&#160;</a></span>criar_objeto_custom()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -156,7 +184,7 @@ Funções</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>qtd_Pixel</em></span>, </td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>qtd_pixel</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -170,7 +198,7 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">info</td><td>Vetor de pixels (posições relativas a 0,0). </td></tr>
-    <tr><td class="paramname">qtd_Pixel</td><td>Quantidade de pixels em info. </td></tr>
+    <tr><td class="paramname">qtd_pixel</td><td>Quantidade de pixels em info. </td></tr>
     <tr><td class="paramname">normalizar</td><td>Se true, ajusta pixels para pivot em (0,0). </td></tr>
   </table>
   </dd>

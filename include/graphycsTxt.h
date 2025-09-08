@@ -7,8 +7,6 @@
 #define TXT_1_CHAR_WIDTH 3
 #define TXT_1_CHAR_HEIGHT 5
 
-/* Piskel data for "New Piskel" */
-
 static const uint32_t txt_font_data_1[40][15] = {
 {
 0xff000000, 0xff000000, 0xff000000, 
